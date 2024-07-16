@@ -11,8 +11,8 @@ def score():
 score()
 
 def promedio(numeros):
-total = sum(numeros)
-    promedio = total / len(numero)
+    total = sum(numeros)
+    promedio = total / len(numeros)
     print(promedio)
 
 
