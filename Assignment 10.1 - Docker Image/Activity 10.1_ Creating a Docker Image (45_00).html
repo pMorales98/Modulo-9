@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<!-- saved from url=(0085)https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759 -->
+<html class="" dir="ltr" lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/gtm.js.descarga"></script><script async="" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/gtm.js.descarga"></script>
+
+<link rel="preload" href="https://classroom.emeritus.org/dist/fonts/lato/extended/Lato-Regular-bd03a2cc27.woff2" as="font" type="font/woff2" crossorigin="anonmyous">
+<link rel="preload" href="https://classroom.emeritus.org/dist/fonts/lato/extended/Lato-Bold-cccb897485.woff2" as="font" type="font/woff2" crossorigin="anonmyous">
+<link rel="preload" href="https://classroom.emeritus.org/dist/fonts/lato/extended/Lato-Italic-4eb103b4d1.woff2" as="font" type="font/woff2" crossorigin="anonmyous">
+<link rel="stylesheet" media="screen" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/fonts-121976a52e.css">
+<script>if (navigator.userAgent.match(/(MSIE|Trident\/)/)) location.replace('/ie-is-not-supported.html')</script>
+<link rel="shortcut icon" type="image/x-icon" href="https://classroom.emeritus.org/accounts/43/files/883/download?verifier=A2MCBCredUb557tuxgQz5kk7BJ4uLCHkrMnQAFMU">
+<link rel="apple-touch-icon" href="https://classroom.emeritus.org/accounts/43/files/884/download?verifier=Wz45oTGKQUMzpQlvVcGEIuijXALsCkb0vAcpxM7w">
+<link rel="stylesheet" media="all" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/variables-1cc802e2040676a4cf1efa712ced2650.css">
+<link rel="stylesheet" media="all" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/common-70cec74cf3.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#a90533">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" media="all" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/assignments-81d750ea73.css">
+<link rel="stylesheet" media="all" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/tinymce-5f707bbfa3.css">
+<link rel="stylesheet" media="all" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/learning_outcomes-273e957a79.css">
+<link rel="stylesheet" media="all" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/canvas_classroom_global.css">
+<link rel="stylesheet" media="all" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/Emeritusglobal.css">
+<link rel="stylesheet" media="all" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/MITXPRO.css">
+<script>
+    function _earlyClick(e){
+      var c = e.target
+      while (c && c.ownerDocument) {
+        if (c.getAttribute('href') == '#' || c.getAttribute('data-method')) {
+          if (!e.defaultPrevented) {
+            e.preventDefault()
+          }
+          (_earlyClick.clicks = _earlyClick.clicks || []).push(c)
+          break
+        }
+        c = c.parentNode
+      }
+    }
+    document.addEventListener('click', _earlyClick)
+  </script>
+<script>
+    INST = {"environment":"production","logPageViews":true,"editorButtons":[{"name":"Codio","id":29266,"favorite":false,"url":"https://apollo.codio.com/lti/editor_button","icon_url":"https://static-assets.codio.com/dashboard/images/icons/favicon-16x16.da14ae918fd9bc3b.png","canvas_icon_class":null,"width":800,"height":400,"use_tray":false,"description":"\u003cp\u003ePlatform for teaching computer science and Math\u003c/p\u003e\n"}]};
+    ENV = {"ASSET_HOST":null,"active_brand_config_json_url":"/dist/brandable_css/554cfcbcdc2a9ed5d75817c34222d69a/variables-1cc802e2040676a4cf1efa712ced2650.json","active_brand_config":{"md5":"554cfcbcdc2a9ed5d75817c34222d69a","variables":{"ic-brand-primary":"#a90532","ic-link-color":"#a90533","ic-brand-global-nav-bgd":"#a90533","ic-brand-global-nav-ic-icon-svg-fill":"#FFFFFF","ic-brand-global-nav-avatar-border":"#FFFFFF","ic-brand-global-nav-logo-bgd":"#FFFFFF","ic-brand-header-image":"https://classroom.emeritus.org/accounts/43/files/881/download?verifier=cxrKzKv4XOPIlV9MVYyK00xTehAqRIskVRBTZtO5","ic-brand-mobile-global-nav-logo":"https://classroom.emeritus.org/accounts/43/files/882/download?verifier=j0MEQbPsbio5jmHW3T8PkkpNlpfZKvXeC2OOmwOc","ic-brand-favicon":"https://classroom.emeritus.org/accounts/43/files/883/download?verifier=A2MCBCredUb557tuxgQz5kk7BJ4uLCHkrMnQAFMU","ic-brand-apple-touch-icon":"https://classroom.emeritus.org/accounts/43/files/884/download?verifier=Wz45oTGKQUMzpQlvVcGEIuijXALsCkb0vAcpxM7w","ic-brand-msapplication-tile-square":"https://classroom.emeritus.org/accounts/43/files/885/download?verifier=nsrcKIaBz8tlaioww9KuhWnMLnJ6UvItJrkeqQk8","ic-brand-msapplication-tile-wide":"https://classroom.emeritus.org/accounts/43/files/886/download?verifier=ekPjyvoBfMt5HFumWy9skeyop6RwOgHNdZCfjMqH","ic-brand-right-sidebar-logo":"https://classroom.emeritus.org/accounts/43/files/887/download?verifier=f3oGUFjjWmfIchZEpyzUQ2YbVDZc45zCmrDmkNZE"},"share":false,"name":null,"created_at":"2024-07-17T11:40:13Z","js_overrides":"","css_overrides":"https://classroom.emeritus.org/accounts/43/files/1192624/download?verifier=MdlN3SO1w1I4CdUHMIftdyCpxjAmWqT6Fzf6FDKP","mobile_js_overrides":"","mobile_css_overrides":"","parent_md5":"6656befa9a3af37025b13ea40134d662"},"confetti_branding_enabled":false,"url_to_what_gets_loaded_inside_the_tinymce_editor_css":["/dist/brandable_css/554cfcbcdc2a9ed5d75817c34222d69a/variables-1cc802e2040676a4cf1efa712ced2650.css","/dist/brandable_css/new_styles_normal_contrast/bundles/what_gets_loaded_inside_the_tinymce_editor-d4f585b802.css","/dist/brandable_css/no_variables/bundles/fonts-121976a52e.css"],"url_for_high_contrast_tinymce_editor_css":["/dist/brandable_css/default/variables-high_contrast-1cc802e2040676a4cf1efa712ced2650.css","/dist/brandable_css/new_styles_high_contrast/bundles/what_gets_loaded_inside_the_tinymce_editor-f3a392dc89.css","/dist/brandable_css/no_variables/bundles/fonts-121976a52e.css"],"current_user_id":"232227","current_user_global_id":"10000000232227","current_user_roles":["user","student"],"current_user_is_student":true,"current_user_types":[],"current_user_disabled_inbox":false,"current_user_visited_tabs":null,"discussions_reporting":false,"files_domain":"classroom.emeritus.org","DOMAIN_ROOT_ACCOUNT_ID":"10000000000001","k12":false,"help_link_name":"Ayuda","help_link_icon":"help","use_high_contrast":false,"auto_show_cc":false,"disable_celebrations":false,"disable_keyboard_shortcuts":false,"LTI_LAUNCH_FRAME_ALLOWANCES":["geolocation *","microphone *","camera *","midi *","encrypted-media *","autoplay *","clipboard-write *","display-capture *"],"DEEP_LINKING_POST_MESSAGE_ORIGIN":"https://classroom.emeritus.org","DEEP_LINKING_LOGGING":null,"comment_library_suggestions_enabled":false,"SETTINGS":{"open_registration":false,"collapse_global_nav":false,"release_notes_badge_disabled":false,"filter_speed_grader_by_student_group":false},"FULL_STORY_ENABLED":false,"RAILS_ENVIRONMENT":"production","DIRECT_SHARE_ENABLED":false,"CAN_VIEW_CONTENT_SHARES":false,"FEATURES":{"featured_help_links":false,"lti_platform_storage":false,"scale_equation_images":false,"buttons_and_icons_cropper":false,"calendar_series":false,"account_level_blackout_dates":false,"account_calendar_events":false,"rce_ux_improvements":false,"render_both_to_do_lists":false,"course_paces_redesign":false,"course_paces_for_students":false,"rce_better_paste":false,"product_tours":false,"files_dnd":false,"usage_rights_discussion_topics":false,"granular_permissions_manage_users":false,"create_course_subaccount_picker":false,"lti_deep_linking_module_index_menu_modal":false,"lti_multiple_assignment_deep_linking":false,"buttons_and_icons_root_account":false,"extended_submission_state":false,"scheduled_page_publication":false,"send_usage_metrics":false,"embedded_release_notes":true,"canvas_k6_theme":false,"new_math_equation_handling":true},"current_user":{"id":"232227","anonymous_id":"4z6r","display_name":"Pablo Morales","avatar_image_url":"https://classroom.emeritus.org/images/messages/avatar-50.png","html_url":"https://classroom.emeritus.org/about/232227","pronouns":null,"avatar_is_fallback":true},"context_asset_string":"course_7372","ping_url":"https://classroom.emeritus.org/api/v1/courses/7372/ping","TIMEZONE":"Etc/UTC","CONTEXT_TIMEZONE":"Etc/UTC","LOCALES":["es","en"],"BIGEASY_LOCALE":"es_ES","FULLCALENDAR_LOCALE":"es","MOMENT_LOCALE":"es","rce_auto_save_max_age_ms":86400000,"K5_USER":false,"K5_HOMEROOM_COURSE":false,"K5_SUBJECT_COURSE":false,"LOCALE_TRANSLATION_FILE":"/dist/javascripts/translations/es-a3600a14d5.json","media_comment_asset_string":"user_232227","COURSE_ID":"7372","SUBMISSION_ID":"9106217","FIRST_ANNOTATION_SUBMISSION":false,"RICH_CONTENT_APP_HOST":"classroom.emeritus.org/rce","JWT":"ZXlKaGJHY2lPaUprYVhJaUxDSmxibU1pT2lKQk1qVTJSME5OSWl3aVpXNTJhWEp2Ym0xbGJuUWlPaUp3Y205a2RXTjBhVzl1SW4wLi5zUm15QUZuLVJRcmlvZ0d3LjRXWFdTWHpITm9kXzk2b2FpcnhqRU5FLUV1LXhrb0ZyOU9mbHFrclljcmI1NmQ4SExSSDV1VjRoYklxX2ROMXM0LTlheFJfdjhMQW5CSmlyQmh0SWVHTzBTd1NQVUFhNFdMcUgxZDhObWFacDY0VVBPcXZlUEM0U05LejQ3NUliZWJfUGRJazJBdVdVMVVzM01BVng1bUdOekxLdHQyNXB1c0RDUkxScExvb2hseUt1dTRZMExUNUM3aFBuOVRJS2NLT196OHZjc3l5aFhYUklRT2lEMHdxckVsa1lKZDJub0RpeVlBVjFwVldKcHBYQXpZREhzVVdFQjFlQ2ltbGZlenJSZjBxMmE5RXJxVldVZHZmdlBWbFpVWWRPSWNlVHpfQXRyT0RZN2szSkxZSDhwckNqYkIyUlRlY3ZGbUo2X1hQM1JZYWhVdERmMFVYODlXVGhYT3F1UlJTNVozYl9GRGhqYW9GVFdwVXpWTGVjb3hFRXNiS09BMTliUmZxczFpUkhPYmlnUFR5UzNXQkpfUTNENFVQUlpSckpPYnpmRGFMNFJnR2tqVldIMWNKdVUzZF9GUXZ0QXltMWRER2ttUXVTZjd4aDBJcnBDcUxPZ0JVTWhrM05RSU1WX0hnWXFCaHlRLVR5QzZnaFU1dHZ3THY2SjZVMk9ZUlJnV0VWS2VMVnZySzVfU3Awd1ZnY1VSaTVaUnFwNUdrTWZ0UVFNVnY5ZENjeUtyNGtScmJvX1M5RDBmTUotbUtlN2tBME5IVHY5QUNZZldDN3ZWVkxlUkdMb0tiNnMzZGE3LWdqMGRjNjZwMURKRng3clowUkFLRXFMdjZSUzlBNHlxcnduLVFodWxpd3dDdHRxSlJyeHNyWnp5Z3MzRkFhSGdCS3Y1QlRFRXVuYjd2NDdkdHNsQWFpbWppSlgwRmVyLU5iSGNCRDJkaWltNk4wWDVWal82Qks5cmdlUWVVLTkyNmI5ZlFxQjdqaEdsbXR5SERWTmZ1bldhcnA3WDdZR0t2azE0eGpJUDhIdzhrMGFKQU5KdFYtZUdMcXFCRVhhRC05Z0J0di13LjBHWUdIOHlkSWhsUTEtYmRaQ1gzNGc=","RICH_CONTENT_CAN_UPLOAD_FILES":false,"RICH_CONTENT_CAN_EDIT_FILES":false,"RICH_CONTENT_FILES_TAB_DISABLED":true,"RICH_CONTENT_INST_RECORD_TAB_DISABLED":false,"ASSIGNMENT_ID":"220483","PREREQS":{},"EULA_URL":null,"EXTERNAL_TOOLS":[],"PERMISSIONS":{"context":{"read_as_admin":false,"manage_assignments":false,"manage_assignments_edit":false},"assignment":{"update":false,"submit":true},"can_manage_groups":false},"ROOT_OUTCOME_GROUP":{"id":"5325","title":"Certificado Profesional en Ingeniería de Datos","vendor_guid":null,"url":"/api/v1/courses/7372/outcome_groups/5325","subgroups_url":"/api/v1/courses/7372/outcome_groups/5325/subgroups","outcomes_url":"/api/v1/courses/7372/outcome_groups/5325/outcomes","can_edit":false,"import_url":"/api/v1/courses/7372/outcome_groups/5325/import","context_id":"7372","context_type":"Course","description":null},"SIMILARITY_PLEDGE":null,"CONFETTI_ENABLED":false,"EMOJIS_ENABLED":false,"EMOJI_DENY_LIST":null,"USER_ASSET_STRING":"user_232227","CONDITIONAL_RELEASE_SERVICE_ENABLED":true,"CONDITIONAL_RELEASE_ENV":{"assignment":{"id":"220483","title":"Activity 10.1: Creating a Docker Image (45:00)","description":"\u003cdiv style=\"background-color: #efefef;\"\u003e\n\u003cp class=\"kl_module_progress_completion\" style=\"display: none; background-color: #a31f34; color: #ffffff;\"\u003eModule Item Completion (built in browser, hidden in app)\u003c/p\u003e\n\u003c/div\u003e\n\u003cdiv style=\"background-color: #efefef;\"\u003e\n\u003ch4\u003e\u003cspan style=\"color: #a31f34;\"\u003e\u003cstrong\u003e \u003cimg id=\"1717093\" src=\"/courses/7372/files/2246168/preview\" alt=\"Module Outcomes.png\" width=\"44\" height=\"44\" data-api-endpoint=\"https://classroom.emeritus.org/api/v1/courses/7372/files/2246168\" data-api-returntype=\"File\"\u003eLearning Outcome Addressed:\u003c/strong\u003e\u003c/span\u003e\u003c/h4\u003e\n\u003col start=\"4\"\u003e\n\u003cli\u003e\u003cspan\u003e Create a Docker \u003cem\u003eimage\u003c/em\u003e.\u003c/span\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/div\u003e\n\u003cp\u003eIn this activity, you will be using Visual Studio (VS) Code to create an \u003cem\u003eimage \u003c/em\u003efor a web application that displays “Hello World - my first Docker Image!”. Make sure to install the Docker extension for VS Code:\u003c/p\u003e\n\u003cp\u003e\u003cimg id=\"2213508\" style=\"display: block; margin-left: auto; margin-right: auto;\" title=\"Download the Docker extension for Visual Studio Code.\" src=\"/courses/7372/files/2535319/preview\" alt=\"Download the Docker extension for Visual Studio Code.\" data-api-endpoint=\"https://classroom.emeritus.org/api/v1/courses/7372/files/2535319\" data-api-returntype=\"File\"\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan\u003ePrior to beginning this activity, be sure to review the submission instructions below to ensure that you collect the required screenshots as you progress through the activity.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003eTo complete the activity, perform the following steps:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eDownload the following starter file to your local machine: \u003cspan\u003e\u003ca class=\"inline_disabled\" title=\"Assignment 10.1 - Docker Image.zip\" href=\"/courses/7372/files/2535383/download\" data-api-endpoint=\"https://classroom.emeritus.org/api/v1/courses/7372/files/2535383\" data-api-returntype=\"File\"\u003eAssignment 10.1 - Docker Image.zip\u003c/a\u003e. The zip file contains the initial code for this activity.\u003c/span\u003e\u003c/li\u003e\n\u003cli\u003eOpen the folder in Visual Studio Code:\n\u003cp\u003e\u003cimg id=\"2213509\" style=\"display: block; margin-left: auto; margin-right: auto;\" title=\"Open the starter zip file in Visual Studio Code.\" src=\"/courses/7372/files/2535221/preview\" alt=\"Open the starter zip file in Visual Studio Code.\" data-api-endpoint=\"https://classroom.emeritus.org/api/v1/courses/7372/files/2535221\" data-api-returntype=\"File\"\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eAdd a file called “Dockerfile” and copy the following contents to the file:\u003c/p\u003e\n\u003ctable style=\"margin-left: auto; margin-right: auto;\" width=\"624\"\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd style=\"border: 1px solid black;\" width=\"624\"\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003eFROM node:12.16.3\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003eWORKDIR /code\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003eENV PORT 80\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003eCOPY package.json /code/package.json\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003eRUN npm install\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003eCOPY . /code/\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003eCMD [ \"node\", \"src/server.js\"]\u003c/span\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003cp\u003eMake sure to add the Dockerfile file in the folder “Assignment 10.1 - Docker Image” and to save it after editing it. The Dockerfile contains instructions for the Docker engine to create the Docker \u003cem\u003eimage\u003c/em\u003e. For more information regarding the contents of the Dockerfile, refer to this video from the 2020 DockerCon: \u003cspan\u003e\u003ca class=\"inline_disabled\" href=\"https://youtu.be/iqqDU2crIEQ\" target=\"_blank\"\u003eHow to Get Started with Docker\u003c/a\u003e.\u003c/span\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003eNow you are ready to start creating an \u003cem\u003eimage\u003c/em\u003e of this web application. You will need to go to the command line to run the Docker commands to create an \u003cem\u003eimage\u003c/em\u003e. In Visual Studio Code, navigate to Terminal. Then, select New Terminal:\n\u003cp\u003e\u003cimg id=\"2213510\" style=\"display: block; margin-left: auto; margin-right: auto;\" title=\"Open a new terminal in Visual Studio Code.\" src=\"/courses/7372/files/2535222/preview\" alt=\"Open a new terminal in Visual Studio Code.\" data-api-endpoint=\"https://classroom.emeritus.org/api/v1/courses/7372/files/2535222\" data-api-returntype=\"File\"\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003eRun the following command from the prompt to create an \u003cem\u003eimage\u003c/em\u003e:\n\u003cp\u003eNote: When you run this command, you should be in the same folder where you downloaded the \u003cspan\u003e\u003ca class=\"inline_disabled\" title=\"Assignment 10.1 - Docker Image.zip\" href=\"/courses/7372/files/2535383/download\" data-api-endpoint=\"https://classroom.emeritus.org/api/v1/courses/7372/files/2535383\" data-api-returntype=\"File\"\u003eAssignment 10.1 - Docker Image.zip\u003c/a\u003e starter file. This should also be the same folder where you created the Dockerfile. The space at the end of the \u003c/span\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003edocker build\u003c/span\u003e command (“\u003cspan style=\"font-family: 'courier new', courier;\"\u003e.\u003c/span\u003e”) means “current directory”.\u003c/p\u003e\n\u003ctable style=\"margin-left: auto; margin-right: auto;\" width=\"624\"\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd style=\"border: 1px solid black;\" width=\"624\"\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003edocker build --tag hello-world.\u003c/span\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003cp\u003e\u003cimg id=\"2213511\" style=\"display: block; margin-left: auto; margin-right: auto;\" title=\"Assignment 10.1 - Docker Image Dockerfile.\" src=\"/courses/7372/files/2535269/preview\" alt=\"Assignment 10.1 - Docker Image Dockerfile.\" data-api-endpoint=\"https://classroom.emeritus.org/api/v1/courses/7372/files/2535269\" data-api-returntype=\"File\"\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eYou should now have created a Docker\u003cem\u003e image\u003c/em\u003e for the Hello World application. To view the Docker \u003cem\u003eimage\u003c/em\u003e, run the following command from the prompt:\u003c/p\u003e\n\u003ctable style=\"margin-left: auto; margin-right: auto;\" width=\"624\"\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd style=\"border: 1px solid black;\" width=\"624\"\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003edocker images\u003c/span\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eNow you can run your \u003cem\u003eimage\u003c/em\u003e. Execute the following command from the prompt:\u003c/p\u003e\n\u003ctable style=\"margin-left: auto; margin-right: auto;\" width=\"624\"\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd style=\"border: 1px solid black;\" width=\"624\"\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003edocker run -p 8080:80 --name hello -d hello-world\u003c/span\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003cp\u003eNote: For a detailed description of each Docker command, including explanations of each of the options, you can run \u003cspan style=\"font-family: 'courier new', courier;\"\u003e--help\u003c/span\u003e for each of the commands. See the following example:\u003c/p\u003e\n\u003ctable style=\"margin-left: auto; margin-right: auto;\" width=\"624\"\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd style=\"border: 1px solid black;\" width=\"624\"\u003e\n\u003cp\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003edocker run --help\u003c/span\u003e\u003c/p\u003e\n\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eNext, open your browser and navigate to the URL of http://localhost:8080/\u003cspan\u003e.\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003eYour “Hello World - my first Docker Image!” page will be displayed.\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eCongratulations! You created your first Docker \u003cem\u003eimage, \u003c/em\u003eand you also ran the\u003cem\u003e image\u003c/em\u003e from inside the Docker \u003cem\u003econtainer\u003c/em\u003e.\u003c/p\u003e\n\u003cp\u003eSubmission Instructions:\u003c/p\u003e\n\u003cp\u003eYour submission for this activity should be a Word document that includes the following screenshots, each labeled for the step that the screenshot represents:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eDockerfile added to the “Activity 10.1 - Docker Image” folder.\u003c/li\u003e\n\u003cli\u003e\u003cspan\u003eScreenshot of running the \u003c/span\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003edocker build\u003c/span\u003e\u003cspan\u003e command.\u003c/span\u003e\u003c/li\u003e\n\u003cli\u003e\u003cspan\u003eScreenshot of running the \u003c/span\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003edocker images\u003c/span\u003e\u003cspan\u003e command.\u003c/span\u003e\u003c/li\u003e\n\u003cli\u003e\u003cspan\u003eScreenshot of running the \u003c/span\u003e\u003cspan style=\"font-family: 'courier new', courier;\"\u003edocker run\u003c/span\u003e\u003cspan\u003e command to run the \u003cem\u003eimage\u003c/em\u003e in the \u003cem\u003econtainer\u003c/em\u003e.\u003c/span\u003e\u003c/li\u003e\n\u003cli\u003e\u003cspan\u003eScreenshot of a web browser to show that you have navigated to the URL of http://localhost:8080/. The web page should display “Hello World - my first Docker Image!”\u003c/span\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003cspan\u003eAdditional Details: \u003c/span\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cspan\u003eEstimated completion time: 45 min\u003c/span\u003e\u003c/li\u003e\n\u003cli\u003e\u003cem\u003eThis is a required activity and counts toward course completion.\u003c/em\u003e\u003c/li\u003e\n\u003c/ul\u003e","points_possible":20.0,"grading_type":"points","submission_types":"online_upload","grading_scheme":{"A":0.94,"A-":0.9,"B+":0.87,"B":0.84,"B-":0.8,"C+":0.77,"C":0.74,"C-":0.7,"D+":0.67,"D":0.64,"D-":0.61,"F":0.0}},"course_id":"7372","stats_url":"/api/v1/courses/7372/mastery_paths/stats","rule":null},"SUBMIT_ASSIGNMENT":{"ALLOWED_EXTENSIONS":[],"ID":"220483","GROUP_ID_FOR_USER":null},"badge_counts":{"submissions":1},"notices":[],"active_context_tab":"assignments"};
+    BRANDABLE_CSS_HANDLEBARS_INDEX = [["new_styles_normal_contrast","new_styles_high_contrast","new_styles_normal_contrast_rtl","new_styles_high_contrast_rtl"],{"10":["0b3ef1e2a0",0,"cff9105a0b",2],"15":["01b8d2ecfb",0,"015c6ca4ae",2],"19":["4dddb72577"],"61":["4a861ae6a1","a22a6dd039","b5ada2efd7","ca3cd4ea63"],"67":["568ccc30ee",0,"a9abb9f2a7",2],"71":["19627a1079","4addc321bb","a8d1713cbc","26c0b18b16"],"06":["655068abe6",0,"5b59f0d34d",2],"f0":["4adf630f9a",0,0,0],"c8":["f867b49f76","621434eaa3","f854eaa566","1cb6f725e7"],"1e":["eb52346587","d3815e44a4","47aae34fb7","ffaed1f038"],"b3":["5270334b1f","f5fd98f184","51f9417986","8f98d2869b"],"4f":["8d59c78c42",0,"baec34d921",2],"0c":["40f6688c86",0,"3f57a7b0f9",2],"da":["6ebb2aa617","8211739254","fc3c3e2563","4a02a48408"],"1d":["e8700526dd",0,"4ab7027c3e",2],"08":["d349fb50b2"],"e2":["f24b5777fd"],"9f":["5978a0a45b",0,0,0],"2b":["4b2b39c6ba","82a71ec679","d3292399dd","5a17549578"],"2c":["0a6ae8193d",0,0,0],"c2":["be1ffd00cb"],"9c":["503e55d79f",0,"bf53214d68",2],"c5":["81ae108c8d","63b209d9b7","1bcfb5cea8","f217d18ea5"],"f2":["1a7e68637a"]}]
+;
+  </script>
+<link rel="preload" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/variables-1cc802e2040676a4cf1efa712ced2650.js.descarga" as="script" type="text/javascript"><link rel="preload" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/UTC-c12d8c7f21.js.descarga" as="script" type="text/javascript"><link rel="preload" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/UTC-c12d8c7f21.js.descarga" as="script" type="text/javascript"><link rel="preload" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/es_ES-b838eb0547.js.descarga" as="script" type="text/javascript"><link rel="preload" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/es-c-1102eee1ef.js.descarga"><link rel="preload" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/main-e-e923f9527a.js.descarga" crossorigin="anonymous"><script>
+//<![CDATA[
+
+      ;["/dist/brandable_css/554cfcbcdc2a9ed5d75817c34222d69a/variables-1cc802e2040676a4cf1efa712ced2650.js", "/dist/timezone/Etc/UTC-c12d8c7f21.js", "/dist/timezone/Etc/UTC-c12d8c7f21.js", "/dist/timezone/es_ES-b838eb0547.js", "/dist/webpack-production/moment/locale/es-c-1102eee1ef.js?_ver=22062023"].forEach(function(src) {
+        var s = document.createElement('script'); s.src = src; s.async = false;
+        document.head.appendChild(s)
+      });
+//]]>
+</script><script src="./Activity 10.1_ Creating a Docker Image (45_00)_files/variables-1cc802e2040676a4cf1efa712ced2650.js.descarga"></script><script src="./Activity 10.1_ Creating a Docker Image (45_00)_files/UTC-c12d8c7f21.js.descarga"></script><script src="./Activity 10.1_ Creating a Docker Image (45_00)_files/UTC-c12d8c7f21.js.descarga"></script><script src="./Activity 10.1_ Creating a Docker Image (45_00)_files/es_ES-b838eb0547.js.descarga"></script><script src="./Activity 10.1_ Creating a Docker Image (45_00)_files/es-c-1102eee1ef.js.descarga"></script><script>
+//<![CDATA[
+
+      ;["/dist/webpack-production/main-e-e923f9527a.js?_ver=22062023"].forEach(function(src) {
+        var s = document.createElement('script'); s.src = src; s.async = false; s.crossOrigin = 'anonymous';
+        document.head.appendChild(s)
+      });
+//]]>
+</script><script src="./Activity 10.1_ Creating a Docker Image (45_00)_files/main-e-e923f9527a.js.descarga" crossorigin="anonymous"></script><link rel="preload" href="https://classroom.emeritus.org/dist/webpack-production/assignment_show-c-47e63120db.js?_ver=22062023"><link rel="preload" href="https://classroom.emeritus.org/dist/webpack-production/submit_assignment-c-10f06e2878.js?_ver=22062023"><link rel="preload" href="https://classroom.emeritus.org/dist/webpack-production/edit_rubric-c-6a3793e34b.js?_ver=22062023"><link rel="preload" href="https://classroom.emeritus.org/dist/webpack-production/navigation_header-c-50f0e8f4c3.js?_ver=22062023"><script>
+//<![CDATA[
+(window.bundles || (window.bundles = [])).push('assignment_show');
+(window.bundles || (window.bundles = [])).push('submit_assignment');
+(window.bundles || (window.bundles = [])).push('edit_rubric');
+(window.bundles || (window.bundles = [])).push('navigation_header');
+//]]>
+</script>
+<title>Activity 10.1: Creating a Docker Image (45:00)</title>
+<script src="./Activity 10.1_ Creating a Docker Image (45_00)_files/canvas_global.js.descarga"></script><script src="./Activity 10.1_ Creating a Docker Image (45_00)_files/classroom_global.js.descarga"></script><style type="text/css"></style><style type="text/css">.mejs-offscreen{clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:polygon(0px 0,0 0,0 0,0 0);position:absolute!important;height:1px;width:1px;overflow:hidden}.mejs-container{position:relative;background:#000;font-family:Helvetica,Arial,serif;text-align:left;vertical-align:top;text-indent:0}.mejs-fill-container,.mejs-fill-container .mejs-container{width:100%;height:100%}.mejs-fill-container{overflow:hidden}.mejs-container:focus{outline:0}.me-plugin{position:absolute}.mejs-embed,.mejs-embed body{width:100%;height:100%;margin:0;padding:0;background:#000;overflow:hidden}.mejs-fullscreen{overflow:hidden!important}.mejs-container-fullscreen{position:fixed;left:0;top:0;right:0;bottom:0;overflow:hidden;z-index:1000}.mejs-container-fullscreen .mejs-mediaelement,.mejs-container-fullscreen video{width:100%;height:100%}.mejs-clear{clear:both}.mejs-background{position:absolute;top:0;left:0}.mejs-mediaelement{position:absolute;top:0;left:0;width:100%;height:100%}.mejs-poster{position:absolute;top:0;left:0;background-size:contain;background-position:50% 50%;background-repeat:no-repeat}:root .mejs-poster img{display:none}.mejs-poster img{border:0;padding:0}.mejs-overlay{position:absolute;top:0;left:0}.mejs-overlay-play{cursor:pointer}.mejs-overlay-button{position:absolute;top:50%;left:50%;width:100px;height:100px;margin:-50px 0 0 -50px;background:url(/dist/webpack-production/746c3af7a145a09239a36e5ef61cfea0.svg) no-repeat}.no-svg .mejs-overlay-button{background-image:url(/dist/webpack-production/716436fb3df0d29e6b37dd62d952676a.png)}.mejs-overlay:hover .mejs-overlay-button{background-position:0 -100px}.mejs-overlay-loading{position:absolute;top:50%;left:50%;width:80px;height:80px;margin:-40px 0 0 -40px;background:#333;background:url(/dist/webpack-production/703c659e4bf563a05c6338a1727e006c.png);background:rgba(0,0,0,.9);background:-webkit-gradient(linear,0 0,0 100%,from(rgba(50,50,50,.9)),to(rgba(0,0,0,.9)));background:-webkit-linear-gradient(top,rgba(50,50,50,.9),rgba(0,0,0,.9));background:-moz-linear-gradient(top,rgba(50,50,50,.9),rgba(0,0,0,.9));background:-o-linear-gradient(top,rgba(50,50,50,.9),rgba(0,0,0,.9));background:-ms-linear-gradient(top,rgba(50,50,50,.9),rgba(0,0,0,.9));background:linear-gradient(rgba(50,50,50,.9),rgba(0,0,0,.9))}.mejs-overlay-loading span{display:block;width:80px;height:80px;background:transparent url(/dist/webpack-production/76b326f4d44222126fee21076595bef5.gif) 50% 50% no-repeat}.mejs-container .mejs-controls{position:absolute;list-style-type:none;margin:0;padding:0;bottom:0;left:0;background:url(/dist/webpack-production/703c659e4bf563a05c6338a1727e006c.png);background:rgba(0,0,0,.7);background:-webkit-gradient(linear,0 0,0 100%,from(rgba(50,50,50,.7)),to(rgba(0,0,0,.7)));background:-webkit-linear-gradient(top,rgba(50,50,50,.7),rgba(0,0,0,.7));background:-moz-linear-gradient(top,rgba(50,50,50,.7),rgba(0,0,0,.7));background:-o-linear-gradient(top,rgba(50,50,50,.7),rgba(0,0,0,.7));background:-ms-linear-gradient(top,rgba(50,50,50,.7),rgba(0,0,0,.7));background:linear-gradient(rgba(50,50,50,.7),rgba(0,0,0,.7));height:30px;width:100%}.mejs-container .mejs-controls div{list-style-type:none;background-image:none;display:block;float:left;margin:0;padding:0;width:26px;height:26px;font-size:11px;line-height:11px;font-family:Helvetica,Arial,serif;border:0}.mejs-controls .mejs-button button{cursor:pointer;display:block;font-size:0;line-height:0;text-decoration:none;margin:7px 5px;padding:0;position:absolute;height:16px;width:16px;border:0;background:transparent url(/dist/webpack-production/40f56f5a736da4effeb790cedb8a52f0.svg) no-repeat}.no-svg .mejs-controls .mejs-button button{background-image:url(/dist/webpack-production/24a0227fbdd3acfd86ff03fc3fc6c8a4.png)}.mejs-controls .mejs-button button:focus{outline:dotted 1px #999}.mejs-container .mejs-controls .mejs-time{color:#fff;display:block;height:17px;width:auto;padding:10px 3px 0;overflow:hidden;text-align:center;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}.mejs-container .mejs-controls .mejs-time a{color:#fff;font-size:11px;line-height:12px;display:block;float:left;margin:1px 2px 0 0;width:auto}.mejs-controls .mejs-play button{background-position:0 0}.mejs-controls .mejs-pause button{background-position:0 -16px}.mejs-controls .mejs-stop button{background-position:-112px 0}.mejs-controls div.mejs-time-rail{direction:ltr;width:200px;padding-top:5px}.mejs-controls .mejs-time-rail span,.mejs-controls .mejs-time-rail a{display:block;position:absolute;width:180px;height:10px;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;cursor:pointer}.mejs-controls .mejs-time-rail .mejs-time-total{margin:5px;background:#333;background:rgba(50,50,50,.8);background:-webkit-gradient(linear,0 0,0 100%,from(rgba(30,30,30,.8)),to(rgba(60,60,60,.8)));background:-webkit-linear-gradient(top,rgba(30,30,30,.8),rgba(60,60,60,.8));background:-moz-linear-gradient(top,rgba(30,30,30,.8),rgba(60,60,60,.8));background:-o-linear-gradient(top,rgba(30,30,30,.8),rgba(60,60,60,.8));background:-ms-linear-gradient(top,rgba(30,30,30,.8),rgba(60,60,60,.8));background:linear-gradient(rgba(30,30,30,.8),rgba(60,60,60,.8))}.mejs-controls .mejs-time-rail .mejs-time-buffering{width:100%;background-image:-o-linear-gradient(-45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255,255,255,.15)),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255,255,255,.15)),color-stop(0.75,rgba(255,255,255,.15)),color-stop(0.75,transparent),to(transparent));background-image:-webkit-linear-gradient(-45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-moz-linear-gradient(-45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-ms-linear-gradient(-45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:linear-gradient(-45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);-webkit-background-size:15px 15px;-moz-background-size:15px 15px;-o-background-size:15px 15px;background-size:15px 15px;-webkit-animation:buffering-stripes 2s linear infinite;-moz-animation:buffering-stripes 2s linear infinite;-ms-animation:buffering-stripes 2s linear infinite;-o-animation:buffering-stripes 2s linear infinite;animation:buffering-stripes 2s linear infinite}@-webkit-keyframes buffering-stripes{from{background-position:0 0}to{background-position:30px 0}}@-moz-keyframes buffering-stripes{from{background-position:0 0}to{background-position:30px 0}}@-ms-keyframes buffering-stripes{from{background-position:0 0}to{background-position:30px 0}}@-o-keyframes buffering-stripes{from{background-position:0 0}to{background-position:30px 0}}@keyframes buffering-stripes{from{background-position:0 0}to{background-position:30px 0}}.mejs-controls .mejs-time-rail .mejs-time-loaded{background:#3caac8;background:rgba(60,170,200,.8);background:-webkit-gradient(linear,0 0,0 100%,from(rgba(44,124,145,.8)),to(rgba(78,183,212,.8)));background:-webkit-linear-gradient(top,rgba(44,124,145,.8),rgba(78,183,212,.8));background:-moz-linear-gradient(top,rgba(44,124,145,.8),rgba(78,183,212,.8));background:-o-linear-gradient(top,rgba(44,124,145,.8),rgba(78,183,212,.8));background:-ms-linear-gradient(top,rgba(44,124,145,.8),rgba(78,183,212,.8));background:linear-gradient(rgba(44,124,145,.8),rgba(78,183,212,.8));width:0}.mejs-controls .mejs-time-rail .mejs-time-current{background:#fff;background:rgba(255,255,255,.8);background:-webkit-gradient(linear,0 0,0 100%,from(rgba(255,255,255,.9)),to(rgba(200,200,200,.8)));background:-webkit-linear-gradient(top,rgba(255,255,255,.9),rgba(200,200,200,.8));background:-moz-linear-gradient(top,rgba(255,255,255,.9),rgba(200,200,200,.8));background:-o-linear-gradient(top,rgba(255,255,255,.9),rgba(200,200,200,.8));background:-ms-linear-gradient(top,rgba(255,255,255,.9),rgba(200,200,200,.8));background:linear-gradient(rgba(255,255,255,.9),rgba(200,200,200,.8));width:0}.mejs-controls .mejs-time-rail .mejs-time-handle{display:none;position:absolute;margin:0;width:10px;background:#fff;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;cursor:pointer;border:solid 2px #333;top:-2px;text-align:center}.mejs-controls .mejs-time-rail .mejs-time-float{position:absolute;display:none;background:#eee;width:36px;height:17px;border:solid 1px #333;top:-26px;margin-left:-18px;text-align:center;color:#111}.mejs-controls .mejs-time-rail .mejs-time-float-current{margin:2px;width:30px;display:block;text-align:center;left:0}.mejs-controls .mejs-time-rail .mejs-time-float-corner{position:absolute;display:block;width:0;height:0;line-height:0;border:solid 5px #eee;border-color:#eee transparent transparent;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;top:15px;left:13px}.mejs-long-video .mejs-controls .mejs-time-rail .mejs-time-float{width:48px}.mejs-long-video .mejs-controls .mejs-time-rail .mejs-time-float-current{width:44px}.mejs-long-video .mejs-controls .mejs-time-rail .mejs-time-float-corner{left:18px}.mejs-controls .mejs-fullscreen-button button{background-position:-32px 0}.mejs-controls .mejs-unfullscreen button{background-position:-32px -16px}.mejs-controls .mejs-volume-button{}.mejs-controls .mejs-mute button{background-position:-16px -16px}.mejs-controls .mejs-unmute button{background-position:-16px 0}.mejs-controls .mejs-volume-button{position:relative}.mejs-controls .mejs-volume-button .mejs-volume-slider{height:115px;width:25px;background:url(/dist/webpack-production/703c659e4bf563a05c6338a1727e006c.png);background:rgba(50,50,50,.7);-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;top:-115px;left:0;z-index:1;position:absolute;margin:0}.mejs-controls .mejs-volume-button:hover{-webkit-border-radius:0 0 4px 4px;-moz-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px}.mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-total{position:absolute;left:11px;top:8px;width:2px;height:100px;background:#ddd;background:rgba(255,255,255,.5);margin:0}.mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-current{position:absolute;left:11px;top:8px;width:2px;height:100px;background:#ddd;background:rgba(255,255,255,.9);margin:0}.mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-handle{position:absolute;left:4px;top:-3px;width:16px;height:6px;background:#ddd;background:rgba(255,255,255,.9);cursor:N-resize;-webkit-border-radius:1px;-moz-border-radius:1px;border-radius:1px;margin:0}.mejs-controls a.mejs-horizontal-volume-slider{height:26px;width:56px;position:relative;display:block;float:left;vertical-align:middle}.mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total{position:absolute;left:0;top:11px;width:50px;height:8px;margin:0;padding:0;font-size:1px;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;background:#333;background:rgba(50,50,50,.8);background:-webkit-gradient(linear,0 0,0 100%,from(rgba(30,30,30,.8)),to(rgba(60,60,60,.8)));background:-webkit-linear-gradient(top,rgba(30,30,30,.8),rgba(60,60,60,.8));background:-moz-linear-gradient(top,rgba(30,30,30,.8),rgba(60,60,60,.8));background:-o-linear-gradient(top,rgba(30,30,30,.8),rgba(60,60,60,.8));background:-ms-linear-gradient(top,rgba(30,30,30,.8),rgba(60,60,60,.8));background:linear-gradient(rgba(30,30,30,.8),rgba(60,60,60,.8))}.mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current{position:absolute;left:0;top:11px;width:50px;height:8px;margin:0;padding:0;font-size:1px;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;background:#fff;background:rgba(255,255,255,.8);background:-webkit-gradient(linear,0 0,0 100%,from(rgba(255,255,255,.9)),to(rgba(200,200,200,.8)));background:-webkit-linear-gradient(top,rgba(255,255,255,.9),rgba(200,200,200,.8));background:-moz-linear-gradient(top,rgba(255,255,255,.9),rgba(200,200,200,.8));background:-o-linear-gradient(top,rgba(255,255,255,.9),rgba(200,200,200,.8));background:-ms-linear-gradient(top,rgba(255,255,255,.9),rgba(200,200,200,.8));background:linear-gradient(rgba(255,255,255,.9),rgba(200,200,200,.8))}.mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-handle{display:none}.mejs-controls .mejs-captions-button{position:relative}.mejs-controls .mejs-captions-button button{background-position:-48px 0}.mejs-controls .mejs-captions-button .mejs-captions-selector{position:absolute;bottom:26px;right:-51px;width:85px;height:100px;background:url(/dist/webpack-production/703c659e4bf563a05c6338a1727e006c.png);background:rgba(50,50,50,.7);border:solid 1px transparent;padding:10px 10px 0;overflow:hidden;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}.mejs-controls .mejs-captions-button .mejs-captions-selector ul{margin:0;padding:0;display:block;list-style-type:none!important;overflow:hidden}.mejs-controls .mejs-captions-button .mejs-captions-selector ul li{margin:0 0 6px;padding:0;list-style-type:none!important;display:block;color:#fff;overflow:hidden}.mejs-controls .mejs-captions-button .mejs-captions-selector ul li input{clear:both;float:left;margin:3px 3px 0 5px}.mejs-controls .mejs-captions-button .mejs-captions-selector ul li label{width:55px;float:left;padding:4px 0 0;line-height:15px;font-family:Helvetica,Arial,serif;font-size:10px}.mejs-controls .mejs-captions-button .mejs-captions-translations{font-size:10px;margin:0 0 5px}.mejs-chapters{position:absolute;top:0;left:0;border-right:solid 1px #fff;width:10000px;z-index:1}.mejs-chapters .mejs-chapter{position:absolute;float:left;background:#222;background:rgba(0,0,0,.7);background:-webkit-gradient(linear,0 0,0 100%,from(rgba(50,50,50,.7)),to(rgba(0,0,0,.7)));background:-webkit-linear-gradient(top,rgba(50,50,50,.7),rgba(0,0,0,.7));background:-moz-linear-gradient(top,rgba(50,50,50,.7),rgba(0,0,0,.7));background:-o-linear-gradient(top,rgba(50,50,50,.7),rgba(0,0,0,.7));background:-ms-linear-gradient(top,rgba(50,50,50,.7),rgba(0,0,0,.7));background:linear-gradient(rgba(50,50,50,.7),rgba(0,0,0,.7));filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr=#323232, endColorstr=#000000);overflow:hidden;border:0}.mejs-chapters .mejs-chapter .mejs-chapter-block{font-size:11px;color:#fff;padding:5px;display:block;border-right:solid 1px #333;border-bottom:solid 1px #333;cursor:pointer}.mejs-chapters .mejs-chapter .mejs-chapter-block-last{border-right:0}.mejs-chapters .mejs-chapter .mejs-chapter-block:hover{background:#666;background:rgba(102,102,102,.7);background:-webkit-gradient(linear,0 0,0 100%,from(rgba(102,102,102,.7)),to(rgba(50,50,50,.6)));background:-webkit-linear-gradient(top,rgba(102,102,102,.7),rgba(50,50,50,.6));background:-moz-linear-gradient(top,rgba(102,102,102,.7),rgba(50,50,50,.6));background:-o-linear-gradient(top,rgba(102,102,102,.7),rgba(50,50,50,.6));background:-ms-linear-gradient(top,rgba(102,102,102,.7),rgba(50,50,50,.6));background:linear-gradient(rgba(102,102,102,.7),rgba(50,50,50,.6));filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr=#666666, endColorstr=#323232)}.mejs-chapters .mejs-chapter .mejs-chapter-block .ch-title{font-size:12px;font-weight:700;display:block;white-space:nowrap;text-overflow:ellipsis;margin:0 0 3px;line-height:12px}.mejs-chapters .mejs-chapter .mejs-chapter-block .ch-timespan{font-size:12px;line-height:12px;margin:3px 0 4px;display:block;white-space:nowrap;text-overflow:ellipsis}.mejs-captions-layer{position:absolute;bottom:0;left:0;text-align:center;line-height:20px;font-size:16px;color:#fff}.mejs-captions-layer a{color:#fff;text-decoration:underline}.mejs-captions-layer[lang=ar]{font-size:20px;font-weight:400}.mejs-captions-position{position:absolute;width:100%;bottom:15px;left:0}.mejs-captions-position-hover{bottom:35px}.mejs-captions-text,.mejs__captions-text *{padding:0;background:url(/dist/webpack-production/703c659e4bf563a05c6338a1727e006c.png);background:rgba(20,20,20,.5);white-space:pre-wrap;-webkit-box-shadow:5px 0 0 rgba(20,20,20,.5),-5px 0 0 rgba(20,20,20,.5);box-shadow:5px 0 0 rgba(20,20,20,.5),-5px 0 0 rgba(20,20,20,.5)}.me-cannotplay{}.me-cannotplay a{color:#fff;font-weight:700}.me-cannotplay span{padding:15px;display:block}.mejs-controls .mejs-loop-off button{background-position:-64px -16px}.mejs-controls .mejs-loop-on button{background-position:-64px 0}.mejs-controls .mejs-backlight-off button{background-position:-80px -16px}.mejs-controls .mejs-backlight-on button{background-position:-80px 0}.mejs-controls .mejs-picturecontrols-button{background-position:-96px 0}.mejs-contextmenu{position:absolute;width:150px;padding:10px;border-radius:4px;top:0;left:0;background:#fff;border:solid 1px #999;z-index:1001}.mejs-contextmenu .mejs-contextmenu-separator{height:1px;font-size:0;margin:5px 6px;background:#333}.mejs-contextmenu .mejs-contextmenu-item{font-family:Helvetica,Arial,serif;font-size:12px;padding:4px 6px;cursor:pointer;color:#333}.mejs-contextmenu .mejs-contextmenu-item:hover{background:#2C7C91;color:#fff}.mejs-controls .mejs-sourcechooser-button{position:relative}.mejs-controls .mejs-sourcechooser-button button{background-position:-128px 0}.mejs-controls .mejs-sourcechooser-button .mejs-sourcechooser-selector{position:absolute;bottom:26px;right:-10px;width:130px;height:100px;background:url(/dist/webpack-production/703c659e4bf563a05c6338a1727e006c.png);background:rgba(50,50,50,.7);border:solid 1px transparent;padding:10px;overflow:hidden;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}.mejs-controls .mejs-sourcechooser-button .mejs-sourcechooser-selector ul{margin:0;padding:0;display:block;list-style-type:none!important;overflow:hidden}.mejs-controls .mejs-sourcechooser-button .mejs-sourcechooser-selector ul li{margin:0 0 6px;padding:0;list-style-type:none!important;display:block;color:#fff;overflow:hidden}.mejs-controls .mejs-sourcechooser-button .mejs-sourcechooser-selector ul li input{clear:both;float:left;margin:3px 3px 0 5px}.mejs-controls .mejs-sourcechooser-button .mejs-sourcechooser-selector ul li label{width:100px;float:left;padding:4px 0 0;line-height:15px;font-family:Helvetica,Arial,serif;font-size:10px}.mejs-postroll-layer{position:absolute;bottom:0;left:0;width:100%;height:100%;background:url(/dist/webpack-production/703c659e4bf563a05c6338a1727e006c.png);background:rgba(50,50,50,.7);z-index:1000;overflow:hidden}.mejs-postroll-layer-content{width:100%;height:100%}.mejs-postroll-close{position:absolute;right:0;top:0;background:url(/dist/webpack-production/703c659e4bf563a05c6338a1727e006c.png);background:rgba(50,50,50,.7);color:#fff;padding:4px;z-index:100;cursor:pointer}div.mejs-speed-button{width:46px!important;position:relative}.mejs-controls .mejs-button.mejs-speed-button button{background:transparent;width:36px;font-size:11px;line-height:normal;color:#fff}.mejs-controls .mejs-speed-button .mejs-speed-selector{position:absolute;top:-100px;left:-10px;width:60px;height:100px;background:url(/dist/webpack-production/703c659e4bf563a05c6338a1727e006c.png);background:rgba(50,50,50,.7);border:solid 1px transparent;padding:0;overflow:hidden;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}.mejs-controls .mejs-speed-button .mejs-speed-selector ul li label.mejs-speed-selected{color:rgba(33,248,248,1)}.mejs-controls .mejs-speed-button .mejs-speed-selector ul{margin:0;padding:0;display:block;list-style-type:none!important;overflow:hidden}.mejs-controls .mejs-speed-button .mejs-speed-selector ul li{margin:0 0 6px;padding:0 10px;list-style-type:none!important;display:block;color:#fff;overflow:hidden}.mejs-controls .mejs-speed-button .mejs-speed-selector ul li input{clear:both;float:left;margin:3px 3px 0 5px}.mejs-controls .mejs-speed-button .mejs-speed-selector ul li label{width:60px;float:left;padding:4px 0 0;line-height:15px;font-family:Helvetica,Arial,serif;font-size:11px;color:#fff;margin-left:5px;cursor:pointer}.mejs-controls .mejs-speed-button .mejs-speed-selector ul li:hover{background-color:#c8c8c8!important;background-color:rgba(255,255,255,.4)!important}.mejs-controls .mejs-button.mejs-jump-forward-button{background:transparent url(/dist/webpack-production/15e1ac8cbacc2efdf1ac2677de48a253.png) no-repeat 3px 3px}.mejs-controls .mejs-button.mejs-jump-forward-button button{background:transparent;font-size:9px;line-height:normal;color:#fff}.mejs-controls .mejs-button.mejs-skip-back-button{background:transparent url(/dist/webpack-production/cd6dc830eb45b3a5a96bbc936ff54846.png) no-repeat 3px 3px}.mejs-controls .mejs-button.mejs-skip-back-button button{background:transparent;font-size:9px;line-height:normal;color:#fff}</style><style type="text/css">/*
+ * Copyright (C) 2014 - present Instructure, Inc.
+ *
+ * This file is part of Canvas.
+ *
+ * Canvas is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, version 3 of the License.
+ *
+ * Canvas is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* customizations to mediaelementplayer css */
+
+/*
+  Because this file is not proccessed by our brandable_css sass pipeline,
+  it cannot use our sass-direction helpers. So we have to handle RTL manually
+  by putting direction-specific styles in [dir="ltr"] or [dir="rtl"] blocks.
+*/
+/* stylelint-disable property-disallowed-list, declaration-property-value-disallowed-list */
+
+/* good menu widths */
+.mejs-sourcechooser-selector {
+  width: 160px;
+}
+.mejs-sourcechooser-selector label {
+  width: 160px !important;
+}
+
+.mejs-captions-selector {
+  width: 105px;
+}
+[dir="ltr"]  .mejs-captions-selector { text-align: left }
+[dir="rtl"]  .mejs-captions-selector { text-align: right }
+
+.mejs-captions-selector label {
+  width: 70px !important;
+}
+
+/* Subtitile upload link */
+.mejs-captions-selector .upload-track {
+  color: white;
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+[dir="ltr"] .mejs-captions-selector .upload-track {
+  margin-right: 0px;
+  margin-left: 5px;
+  float: left;
+}
+[dir="rtl"] .mejs-captions-selector .upload-track {
+  margin-left: 0px;
+  margin-right: 5px;
+  float: right;
+}
+
+/* "x" button to remove a subtitle */
+.mejs-captions-selector a[data-remove] {
+  position: absolute;
+  top: 0;
+  color: white;
+}
+[dir="ltr"] .mejs-captions-selector a[data-remove] { right: 0 }
+[dir="rtl"] .mejs-captions-selector a[data-remove] { left: 0 }
+
+
+/* style menu items without a radio button */
+.mejs-button [role="menu"] {
+  padding: 0 !important;
+}
+ /* compensate for above 0 padding */
+ .mejs-button [role="menu"] ul li {
+  position: relative;
+  padding: 0 10px !important;
+}
+/* add a hover effect */
+.mejs-button [role="menu"] ul li:hover {
+  background-color: #c8c8c8 !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+.mejs-button [role="menu"] ul li input {
+  border: 0;
+  clip: rect(0 0 0 0);
+  position: absolute;
+  overflow: hidden;
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+}
+.mejs-button [role="menu"] ul li label {
+  cursor: pointer;
+}
+[dir="ltr"] .mejs-button [role="menu"] ul li label { margin-left: 5px }
+[dir="rtl"] .mejs-button [role="menu"] ul li label { margin-right: 5px }
+
+
+.mejs-button [role="menu"] label.mejs-selected {
+  color: #21f8f8 !important;
+}
+
+/* stylelint-enable property-disallowed-list, declaration-property-value-disallowed-list */
+</style><style type="text/css" data-glamor=""></style><link rel="stylesheet" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/googleDocsTreeView-8d59c78c42.css" data-loaded-by-brandablecss="true"><link rel="stylesheet" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/PaginatedView-0a6ae8193d.css" data-loaded-by-brandablecss="true"><link rel="stylesheet" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/TreeBrowser-81ae108c8d.css" data-loaded-by-brandablecss="true"><link rel="stylesheet" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/MoveOutcomeDialog-5978a0a45b.css" data-loaded-by-brandablecss="true"></head>
+<body class="with-left-side course-menu-expanded with-right-side assignments primary-nav-expanded context-course_7372 webkit chrome no-touch">
+<noscript>
+  <div role="alert" class="ic-flash-static ic-flash-error">
+    <div class="ic-flash__icon" aria-hidden="true">
+      <i class="icon-warning"></i>
+    </div>
+    <h1>Debe tener activado JavaScript para poder acceder a este sitio.</h1>
+  </div>
+</noscript>
+<div id="flash_message_holder"></div>
+<div id="flash_screenreader_holder" role="alert" aria-live="assertive" aria-relevant="additions" class="screenreader-only" aria-atomic="true"></div>
+<div id="application" class="ic-app">
+<header id="mobile-header" class="no-print">
+<button type="button" class="Button Button--icon-action-rev Button--large mobile-header-hamburger">
+<i class="icon-solid icon-hamburger"></i>
+<span id="mobileHeaderInboxUnreadBadge" class="menu-item__badge" style="min-width: 0px; top: 12px; height: 12px; right: 6px;"></span>
+<span class="screenreader-only">Tablero</span>
+</button>
+<div class="mobile-header-space"></div>
+<a class="mobile-header-title expandable" href="https://classroom.emeritus.org/courses/7372" role="button" aria-controls="mobileContextNavContainer">
+<div>Certificado Profesional en Ingeniería de Datos</div>
+<div>Activity 10.1: Creating a Docker Image (45:00)</div>
+</a>
+<div class="mobile-header-space"></div>
+<button type="button" class="Button Button--icon-action-rev Button--large mobile-header-arrow" aria-label="Menú de navegación">
+<i class="icon-arrow-open-down" id="mobileHeaderArrowIcon"></i>
+</button>
+</header>
+<nav id="mobileContextNavContainer"></nav>
+<header id="header" class="ic-app-header no-print ">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#content" id="skip_navigation_link">Saltar al contenido</a>
+<div role="region" class="ic-app-header__main-navigation" aria-label="Navegación global">
+<div class="ic-app-header__logomark-container">
+<a href="https://classroom.emeritus.org/" class="ic-app-header__logomark">
+<span class="screenreader-only">Tablero</span>
+</a>
+</div>
+<ul id="menu" class="ic-app-header__menu-list">
+<li class="menu-item ic-app-header__menu-list-item ">
+<button id="global_nav_profile_link" class="ic-app-header__menu-list-link">
+<div class="menu-item-icon-container">
+<div aria-hidden="true" class="fs-exclude ic-avatar ">
+<img src="./Activity 10.1_ Creating a Docker Image (45_00)_files/avatar-50.webp" alt="Pablo Morales">
+</div>
+<span class="menu-item__badge"></span>
+</div>
+<div class="menu-item__text">
+Cuenta
+</div>
+</button>
+</li>
+<li class="ic-app-header__menu-list-item ">
+<a id="global_nav_dashboard_link" href="https://classroom.emeritus.org/" class="ic-app-header__menu-list-link">
+<div class="menu-item-icon-container" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg ic-icon-svg--dashboard" version="1.1" x="0" y="0" viewBox="0 0 280 200" enable-background="new 0 0 280 200" xml:space="preserve"><path d="M273.09,180.75H197.47V164.47h62.62A122.16,122.16,0,1,0,17.85,142a124,124,0,0,0,2,22.51H90.18v16.29H6.89l-1.5-6.22A138.51,138.51,0,0,1,1.57,142C1.57,65.64,63.67,3.53,140,3.53S278.43,65.64,278.43,142a137.67,137.67,0,0,1-3.84,32.57ZM66.49,87.63,50.24,71.38,61.75,59.86,78,76.12Zm147,0L202,76.12l16.25-16.25,11.51,11.51ZM131.85,53.82v-23h16.29v23Zm15.63,142.3a31.71,31.71,0,0,1-28-16.81c-6.4-12.08-15.73-72.29-17.54-84.25a8.15,8.15,0,0,1,13.58-7.2c8.88,8.21,53.48,49.72,59.88,61.81a31.61,31.61,0,0,1-27.9,46.45ZM121.81,116.2c4.17,24.56,9.23,50.21,12,55.49A15.35,15.35,0,1,0,161,157.3C158.18,152,139.79,133.44,121.81,116.2Z"></path></svg>
+</div>
+<div class="menu-item__text">Tablero</div>
+</a>
+</li>
+<li class="menu-item ic-app-header__menu-list-item ic-app-header__menu-list-item--active">
+<button id="global_nav_courses_link" class="ic-app-header__menu-list-link">
+<div class="menu-item-icon-container" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg ic-icon-svg--courses" version="1.1" x="0" y="0" viewBox="0 0 280 259" enable-background="new 0 0 280 259" xml:space="preserve"><path d="M73.31,198c-11.93,0-22.22,8-24,18.73a26.67,26.67,0,0,0-.3,3.63v.3a22,22,0,0,0,5.44,14.65,22.47,22.47,0,0,0,17.22,8H200V228.19h-134V213.08H200V198Zm21-105.74h90.64V62H94.3ZM79.19,107.34V46.92H200v60.42Zm7.55,30.21V122.45H192.49v15.11ZM71.65,16.71A22.72,22.72,0,0,0,49,39.36V190.88a41.12,41.12,0,0,1,24.32-8h157V16.71ZM33.88,39.36A37.78,37.78,0,0,1,71.65,1.6H245.36V198H215.15v45.32h22.66V258.4H71.65a37.85,37.85,0,0,1-37.76-37.76Z"></path></svg>
+</div>
+<div class="menu-item__text">
+Cursos
+</div>
+</button>
+</li>
+<li class="menu-item ic-app-header__menu-list-item ">
+<a id="global_nav_calendar_link" href="https://classroom.emeritus.org/calendar" class="ic-app-header__menu-list-link">
+<div class="menu-item-icon-container" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg ic-icon-svg--calendar" version="1.1" x="0" y="0" viewBox="0 0 280 280" enable-background="new 0 0 280 280" xml:space="preserve"><path d="M197.07,213.38h16.31V197.07H197.07Zm-16.31,16.31V180.76h48.92v48.92Zm-48.92-16.31h16.31V197.07H131.85Zm-16.31,16.31V180.76h48.92v48.92ZM66.62,213.38H82.93V197.07H66.62ZM50.32,229.68V180.76H99.24v48.92Zm146.75-81.53h16.31V131.85H197.07Zm-16.31,16.31V115.54h48.92v48.92Zm-48.92-16.31h16.31V131.85H131.85Zm-16.31,16.31V115.54h48.92v48.92ZM66.62,148.15H82.93V131.85H66.62ZM50.32,164.46V115.54H99.24v48.92ZM34,262.29H246V82.93H34ZM246,66.62V42.16A8.17,8.17,0,0,0,237.84,34H213.38v8.15a8.15,8.15,0,1,1-16.31,0V34H82.93v8.15a8.15,8.15,0,0,1-16.31,0V34H42.16A8.17,8.17,0,0,0,34,42.16V66.62Zm-8.15-48.92a24.49,24.49,0,0,1,24.46,24.46V278.6H17.71V42.16A24.49,24.49,0,0,1,42.16,17.71H66.62V9.55a8.15,8.15,0,0,1,16.31,0v8.15H197.07V9.55a8.15,8.15,0,1,1,16.31,0v8.15Z"></path></svg>
+</div>
+<div class="menu-item__text">
+Calendario
+</div>
+</a>
+</li>
+<li class="menu-item ic-app-header__menu-list-item ">
+<a id="global_nav_conversations_link" href="https://classroom.emeritus.org/conversations" class="ic-app-header__menu-list-link">
+<div class="menu-item-icon-container">
+<span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg ic-icon-svg--inbox" version="1.1" x="0" y="0" viewBox="0 0 280 280" enable-background="new 0 0 280 280" xml:space="preserve"><path d="M91.72,120.75h96.56V104.65H91.72Zm0,48.28h80.47V152.94H91.72Zm0-96.56h80.47V56.37H91.72Zm160.94,34.88H228.52V10.78h-177v96.56H27.34A24.17,24.17,0,0,0,3.2,131.48V244.14a24.17,24.17,0,0,0,24.14,24.14H252.66a24.17,24.17,0,0,0,24.14-24.14V131.48A24.17,24.17,0,0,0,252.66,107.34Zm0,16.09a8.06,8.06,0,0,1,8,8v51.77l-32.19,19.31V123.44ZM67.58,203.91v-177H212.42v177ZM27.34,123.44H51.48v79.13L19.29,183.26V131.48A8.06,8.06,0,0,1,27.34,123.44ZM252.66,252.19H27.34a8.06,8.06,0,0,1-8-8V202l30,18H230.75l30-18v42.12A8.06,8.06,0,0,1,252.66,252.19Z"></path></svg>
+</span>
+<span class="menu-item__badge"><span class="ergWt_bGBk">3 mensajes sin leer.</span><span aria-hidden="true">3</span></span>
+</div>
+<div class="menu-item__text">
+Bandeja de entrada
+</div>
+</a>
+</li>
+<li class="ic-app-header__menu-list-item">
+<a id="global_nav_help_link" role="button" class="ic-app-header__menu-list-link" data-track-category="help system" data-track-label="help button" href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#">
+<div class="menu-item-icon-container" role="presentation">
+<svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg menu-item__icon svg-icon-help" version="1.1" x="0" y="0" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" fill="currentColor"><path d="M100,127.88A11.15,11.15,0,1,0,111.16,139,11.16,11.16,0,0,0,100,127.88Zm8.82-88.08a33.19,33.19,0,0,1,23.5,23.5,33.54,33.54,0,0,1-24,41.23,3.4,3.4,0,0,0-2.74,3.15v9.06H94.42v-9.06a14.57,14.57,0,0,1,11.13-14,22.43,22.43,0,0,0,13.66-10.27,22.73,22.73,0,0,0,2.31-17.37A21.92,21.92,0,0,0,106,50.59a22.67,22.67,0,0,0-19.68,3.88,22.18,22.18,0,0,0-8.65,17.64H66.54a33.25,33.25,0,0,1,13-26.47A33.72,33.72,0,0,1,108.82,39.8ZM100,5.2A94.8,94.8,0,1,0,194.8,100,94.91,94.91,0,0,0,100,5.2m0,178.45A83.65,83.65,0,1,1,183.65,100,83.73,83.73,0,0,1,100,183.65" transform="translate(-5.2 -5.2)"></path></svg>
+<span class="menu-item__badge"></span>
+</div>
+<div class="menu-item__text">
+Ayuda
+</div>
+</a> </li>
+</ul>
+</div>
+<div class="ic-app-header__secondary-navigation">
+<ul class="ic-app-header__menu-list">
+<li class="menu-item ic-app-header__menu-list-item">
+<button id="primaryNavToggle" class="ic-app-header__menu-list-link ic-app-header__menu-list-link--nav-toggle" aria-label="Minimizar navegación global" title="Minimizar navegación global">
+<div class="menu-item-icon-container" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg ic-icon-svg--navtoggle" version="1.1" x="0" y="0" width="40" height="32" viewBox="0 0 40 32" xml:space="preserve">
+<path d="M39.5,30.28V2.48H37.18v27.8Zm-4.93-13.9L22.17,4,20.53,5.61l9.61,9.61H.5v2.31H30.14l-9.61,9.61,1.64,1.64Z"></path>
+</svg>
+</div>
+</button>
+</li>
+</ul>
+</div>
+<div id="global_nav_tray_container"></div>
+<div id="global_nav_tour"></div>
+</header>
+<div id="instructure_ajax_error_box">
+<div style="text-align: right; background-color: #fff;"><a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="close_instructure_ajax_error_box_link">Cerrar</a></div>
+<iframe id="instructure_ajax_error_result" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/saved_resource.html" style="border: 0;" title="Error"></iframe>
+</div>
+<div id="wrapper" class="ic-Layout-wrapper">
+<div class="ic-app-nav-toggle-and-crumbs no-print">
+<button type="button" id="courseMenuToggle" class="Button Button--link ic-app-course-nav-toggle" aria-live="polite" aria-label="Ocultar menú de navegación de cursos">
+<i class="icon-hamburger" aria-hidden="true"></i>
+</button>
+<div class="ic-app-crumbs">
+<nav id="breadcrumbs" role="navigation" aria-label="breadcrumbs"><ul><li class="home"><a href="https://classroom.emeritus.org/"><span class="ellipsible ellipsis" style="max-width: 260px;"><i class="icon-home" title="My Dashboard">
+<span class="screenreader-only">My Dashboard</span>
+</i>
+</span></a></li><li><a href="https://classroom.emeritus.org/courses/7372"><span class="ellipsible ellipsis" style="max-width: 260px;">Certificado Profesional en Ingeniería de Datos</span></a></li><li><a href="https://classroom.emeritus.org/courses/7372/assignments"><span class="ellipsible ellipsis" style="max-width: 260px;">Tareas</span></a></li><li><a href="https://classroom.emeritus.org/courses/7372/assignments/220483"><span class="ellipsible ellipsis" style="max-width: 260px;">Activity 10.1: Creating a Docker Image (45:00)</span></a></li></ul></nav>
+</div>
+<div class="right-of-crumbs">
+</div>
+</div>
+<div id="main" class="ic-Layout-columns">
+<div class="ic-Layout-watermark"></div>
+<div id="left-side" class="ic-app-course-menu ic-sticky-on list-view" style="display: block">
+<div id="sticky-container" class="ic-sticky-frame">
+
+<link rel="stylesheet" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/blueprint.min.css">
+<link rel="stylesheet" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/blueprint-icons.min.css">
+<link rel="stylesheet" href="./Activity 10.1_ Creating a Docker Image (45_00)_files/new_course_nav_overrides.css">
+<style>
+   .ic-sticky-frame{
+      overflow-x: hidden !important;
+   }
+   .ic-app-course-menu{
+      width: 205px !important;
+   }
+   .nav-label{
+      margin-left: 0.5rem !important;
+   }
+   .navigation{
+      width: 200px !important;
+   }
+
+   .icon-off-new-nav{
+      margin-left: auto;
+      padding-right: 5px;
+   }
+   .announcements-badge{
+      font-size: 12px !important;
+      padding: 0px !important;
+      margin-left: 5px !important;
+      font-weight: bold !important;
+   }
+</style>
+<div class="wrapper">
+<div class="navigation">
+<ul>
+<li>
+<div class="navigation--item">
+<a href="https://classroom.emeritus.org/courses/7372" id="" aria-label="" title="" tabindex="" class="" target="">
+<div class="nav-holder">
+<span class="new-nav-página-de-inicio-icon blueprint-icon demo-icon icon-attach icon-2x"></span>
+<span class="nav-label">Página de Inicio</span>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div class="navigation--item">
+<a href="https://classroom.emeritus.org/courses/7372/modules" id="" aria-label="" title="" tabindex="" class="" target="">
+<div class="nav-holder">
+<span class="new-nav-módulos-icon blueprint-icon demo-icon icon-attach icon-2x"></span>
+<span class="nav-label">Módulos</span>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div class="navigation--item">
+<a href="https://classroom.emeritus.org/courses/7372/grades" id="" aria-label="" title="" tabindex="" class="" target="">
+<div class="nav-holder">
+<span class="new-nav-calificaciones-icon blueprint-icon demo-icon icon-attach icon-2x"></span>
+<span class="nav-label">Calificaciones</span>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div class="navigation--item">
+<a href="https://classroom.emeritus.org/courses/7372/announcements" id="" aria-label="" title="" tabindex="" class="" target="">
+<div class="nav-holder">
+<span class="new-nav-anuncios-icon blueprint-icon demo-icon icon-attach icon-2x"></span>
+<span class="nav-label">Anuncios</span>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div class="navigation--item">
+<a href="https://classroom.emeritus.org/courses/7372/users" id="" aria-label="" title="" tabindex="" class="" target="">
+<div class="nav-holder">
+<span class="new-nav-personas-icon blueprint-icon demo-icon icon-attach icon-2x"></span>
+<span class="nav-label">Personas</span>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div class="navigation--item">
+<a href="https://classroom.emeritus.org/courses/7372/external_tools/29645" id="" aria-label="" title="" tabindex="" class="" target="">
+<div class="nav-holder">
+<span class="new-nav-sesiones-en-vivo-icon blueprint-icon demo-icon icon-attach icon-2x"></span>
+<span class="nav-label">Sesiones en vivo</span>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div class="navigation--item">
+<a href="https://classroom.emeritus.org/courses/7372/external_tools/13343" id="" aria-label="" title="" tabindex="" class="" target="">
+<div class="nav-holder">
+<span class="new-nav-classmates-icon blueprint-icon demo-icon icon-classmates icon-2x"></span>
+<span class="nav-label">Classmates</span>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div class="navigation--item">
+<a href="https://classroom.emeritus.org/courses/7372/external_tools/26495" id="" aria-label="" title="" tabindex="" class="" target="">
+<div class="nav-holder">
+<span class="new-nav-chat-de-soporte-icon blueprint-icon demo-icon icon-attach icon-2x"></span>
+<span class="nav-label">Chat De Soporte</span>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div class="navigation--item">
+<a href="https://classroom.emeritus.org/courses/7372/external_tools/30587" id="" aria-label="" title="" tabindex="" class="" target="">
+<div class="nav-holder">
+<span class="new-nav-coach-1:1-icon blueprint-icon demo-icon icon-attach icon-2x"></span>
+<span class="nav-label">Coach 1:1</span>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div class="navigation--item">
+<a href="https://classroom.emeritus.org/courses/7372?view=notifications" class="">
+<div class="nav-holder">
+<span class="new-nav-notification-settings-icon blueprint-icon demo-icon icon-announcements icon-2x"></span>
+<span class="nav-label">Notification Settings</span>
+</div>
+</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="not_right_side" class="ic-app-main-content">
+<div id="content-wrapper" class="ic-Layout-contentWrapper">
+<div id="content" class="ic-Layout-contentMain" role="main">
+<style>
+  #right-side-wrapper {
+    height: 100%;
+  }
+</style>
+<div id="assignment_show" class="assignment content_underline_links">
+
+<div class="assignment-title">
+<div class="title-content">
+<h1 class="title">
+Activity 10.1: Creating a Docker Image (45:00)
+</h1>
+</div>
+<div class="assignment-buttons">
+<button type="button" class="Button Button--primary submit_assignment_link ">Empezar tarea</button>
+</div>
+</div>
+<ul class="student-assignment-overview">
+<li>
+<span class="title">Fecha de entrega</span>
+<span class="value">
+<span class="date_text">
+<span class="display_date">12 de jun</span> a las
+<span class="display_time">16:29</span>
+</span></span>
+</li>
+<li>
+<span class="title">Puntos</span>
+<span class="value">20</span>
+</li>
+<li>
+<span class="title">Entregando</span>
+<span class="value">una carga de archivo</span>
+</li>
+<li>
+<span class="title">Disponible</span>
+<span class="value">
+después de 5 de jun en 0:00
+</span>
+</li>
+<div class="clear"></div>
+</ul>
+<div class="clear"></div>
+<div class="clear"></div>
+<div class="description user_content enhanced"><div style="background-color: #efefef;">
+<div id="kl_module_progress_completion_0" class="kl_progress_completion"><ol aria-label="Module Progress" class="bs-pagination bs-justify-content-center"><li class="kl_complete bs-page-item kl_mod_item_1571742"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571742" title="Module 10 Overview: Introduction and Information (05:00) (Completed)" aria-label="Module 10 Overview: Introduction and Information (05:00) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Module 10 Overview: Introduction and Information (05:00) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571744"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571744" title="Network Basics (12:10) (Completed)" aria-label="Network Basics (12:10) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Network Basics (12:10) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571745"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571745" title="Mini-Lesson 10.1: Command Line Commands (60:00) (Completed)" aria-label="Mini-Lesson 10.1: Command Line Commands (60:00) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Mini-Lesson 10.1: Command Line Commands (60:00) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571746"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571746" title="Knowledge Check 10.1: Command Line Commands (30:00), Quiz (Completed)" aria-label="Knowledge Check 10.1: Command Line Commands (30:00), Quiz (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Knowledge Check 10.1: Command Line Commands (30:00) (Completed)</span><i class="icon-quiz" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571747"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571747" title="Network Basics (07:04) (Completed)" aria-label="Network Basics (07:04) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Network Basics (07:04) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571748"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571748" title="Mini-Lesson 10.2: Retrieving Network Information on a Windows PC (30:00) (Completed)" aria-label="Mini-Lesson 10.2: Retrieving Network Information on a Windows PC (30:00) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Mini-Lesson 10.2: Retrieving Network Information on a Windows PC (30:00) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571749"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571749" title="Using HTTP Messages for Client-Server Communication (9:43) (Completed)" aria-label="Using HTTP Messages for Client-Server Communication (9:43) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Using HTTP Messages for Client-Server Communication (9:43) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571750"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571750" title="Mini-Lesson 10.3: Diving Deeper into Networks (60:00) (Completed)" aria-label="Mini-Lesson 10.3: Diving Deeper into Networks (60:00) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Mini-Lesson 10.3: Diving Deeper into Networks (60:00) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571751"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571751" title="Knowledge Check 10.2: Networks (60:00), Quiz (Completed)" aria-label="Knowledge Check 10.2: Networks (60:00), Quiz (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Knowledge Check 10.2: Networks (60:00) (Completed)</span><i class="icon-quiz" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571753"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571753" title="Network Requests (0:51) (Completed)" aria-label="Network Requests (0:51) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Network Requests (0:51) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571754"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571754" title="Discussion 10.1: Pros and Cons of Using Containers (90:00) (Completed)" aria-label="Discussion 10.1: Pros and Cons of Using Containers (90:00) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Discussion 10.1: Pros and Cons of Using Containers (90:00) (Completed)</span><i class="icon-discussion" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571755"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571755" title="Docker Installation (01:48) (Completed)" aria-label="Docker Installation (01:48) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Docker Installation (01:48) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571756"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571756" title="Mini-Lesson 10.4: Docker (30:00) (Completed)" aria-label="Mini-Lesson 10.4: Docker (30:00) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Mini-Lesson 10.4: Docker (30:00) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571757"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571757" title="Build and Load Flask Image to DockerHub then Download and Run (08:39) (Completed)" aria-label="Build and Load Flask Image to DockerHub then Download and Run (08:39) (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Build and Load Flask Image to DockerHub then Download and Run (08:39) (Completed)</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_complete bs-page-item kl_mod_item_1571758"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571758" title="Knowledge Check 10.3: Docker (30:00), Quiz (Completed)" aria-label="Knowledge Check 10.3: Docker (30:00), Quiz (Completed)" class="bs-page-link bs-bg-success dp-tooltip"><i class="fas fa-check-circle kl_progress_complete kl_complete"></i>&nbsp;<span class="screenreader-only">Knowledge Check 10.3: Docker (30:00) (Completed)</span><i class="icon-quiz" aria-hidden="true"></i></a></li><li class="bs-active bs-page-item kl_mod_item_1571759"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571759" title="Activity 10.1: Creating a Docker Image (45:00), Assignment (Must submit the Assignment)" aria-label="Activity 10.1: Creating a Docker Image (45:00), Assignment (Must submit the Assignment)" class="bs-page-link  dp-tooltip bs-bg-warning" aria-current="page" style="background-color: rgb(163, 31, 52); color: rgb(255, 255, 255);"><i class="fas fa-map-marker-alt"></i> <i class="icon-minimize kl_progress_complete" style="color: black;"></i>&nbsp;<span class="screenreader-only">Activity 10.1: Creating a Docker Image (45:00) ((Must submit the Assignment))</span><i class="icon-assignment" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571760"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571760" title="Load JavaScript Server Using Docker-Compose.yml (02:47) (Must view in order to complete this module item)" aria-label="Load JavaScript Server Using Docker-Compose.yml (02:47) (Must view in order to complete this module item)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Load JavaScript Server Using Docker-Compose.yml (02:47) ((Must view in order to complete this module item))</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571761"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571761" title="Mini-Lesson 10.5: Swagger (15:00) (Must view in order to complete this module item)" aria-label="Mini-Lesson 10.5: Swagger (15:00) (Must view in order to complete this module item)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Mini-Lesson 10.5: Swagger (15:00) ((Must view in order to complete this module item))</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571762"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571762" title="Discussion 10.2: Swagger vs. Postman (60:00) (Not yet completed)" aria-label="Discussion 10.2: Swagger vs. Postman (60:00) (Not yet completed)" class="bs-page-link  dp-tooltip bs-bg-warning"><i class="icon-minimize kl_progress_complete" style="color: black;"></i>&nbsp;<span class="screenreader-only">Discussion 10.2: Swagger vs. Postman (60:00) ((Not yet completed))</span><i class="icon-discussion" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571763"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571763" title="Mini-Lesson 10.6: Localhost (60:00) (Must view in order to complete this module item)" aria-label="Mini-Lesson 10.6: Localhost (60:00) (Must view in order to complete this module item)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Mini-Lesson 10.6: Localhost (60:00) ((Must view in order to complete this module item))</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571764"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571764" title="Knowledge Check 10.4: Localhost (30:00), Quiz (Must submit the Quiz)" aria-label="Knowledge Check 10.4: Localhost (30:00), Quiz (Must submit the Quiz)" class="bs-page-link  dp-tooltip bs-bg-warning"><i class="icon-minimize kl_progress_complete" style="color: black;"></i>&nbsp;<span class="screenreader-only">Knowledge Check 10.4: Localhost (30:00) ((Must submit the Quiz))</span><i class="icon-quiz" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571765"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571765" title="Postman Setup (12:53) (Must view in order to complete this module item)" aria-label="Postman Setup (12:53) (Must view in order to complete this module item)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Postman Setup (12:53) ((Must view in order to complete this module item))</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571766"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571766" title="Mini-Lesson 10.7: Strapi (45:00) (Must view in order to complete this module item)" aria-label="Mini-Lesson 10.7: Strapi (45:00) (Must view in order to complete this module item)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Mini-Lesson 10.7: Strapi (45:00) ((Must view in order to complete this module item))</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571767"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571767" title="Try-It Activity 10.1: Writing Requests in Postman (60:00), Discussion (Not yet completed)" aria-label="Try-It Activity 10.1: Writing Requests in Postman (60:00), Discussion (Not yet completed)" class="bs-page-link  dp-tooltip bs-bg-warning"><i class="icon-minimize kl_progress_complete" style="color: black;"></i>&nbsp;<span class="screenreader-only">Try-It Activity 10.1: Writing Requests in Postman (60:00) ((Not yet completed))</span><i class="icon-discussion" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571768"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571768" title="Using Postman to Communicate with Strapi (03:35) (Must view in order to complete this module item)" aria-label="Using Postman to Communicate with Strapi (03:35) (Must view in order to complete this module item)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Using Postman to Communicate with Strapi (03:35) ((Must view in order to complete this module item))</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571769"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571769" title="Discussion 10.3: Postman and Strapi (60:00) (Not yet completed)" aria-label="Discussion 10.3: Postman and Strapi (60:00) (Not yet completed)" class="bs-page-link  dp-tooltip bs-bg-warning"><i class="icon-minimize kl_progress_complete" style="color: black;"></i>&nbsp;<span class="screenreader-only">Discussion 10.3: Postman and Strapi (60:00) ((Not yet completed))</span><i class="icon-discussion" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571770"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571770" title="Knowledge Check 10.5: Requests (30:00), Quiz (Must submit the Quiz)" aria-label="Knowledge Check 10.5: Requests (30:00), Quiz (Must submit the Quiz)" class="bs-page-link  dp-tooltip bs-bg-warning"><i class="icon-minimize kl_progress_complete" style="color: black;"></i>&nbsp;<span class="screenreader-only">Knowledge Check 10.5: Requests (30:00) ((Must submit the Quiz))</span><i class="icon-quiz" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571772"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571772" title="Module 10: Wrap-Up (Must view in order to complete this module item)" aria-label="Module 10: Wrap-Up (Must view in order to complete this module item)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Module 10: Wrap-Up ((Must view in order to complete this module item))</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571773"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571773" title="Module 10 Final Assignment: Sending Requests to Your Own Web Server (120:00) (Must submit the Assignment)" aria-label="Module 10 Final Assignment: Sending Requests to Your Own Web Server (120:00) (Must submit the Assignment)" class="bs-page-link  dp-tooltip bs-bg-warning"><i class="icon-minimize kl_progress_complete" style="color: black;"></i>&nbsp;<span class="screenreader-only">Module 10 Final Assignment: Sending Requests to Your Own Web Server (120:00) ((Must submit the Assignment))</span><i class="icon-assignment" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571774"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571774" title="Self-Study Video 10.11: Chrome IDE Introduction (14:55) (Must view in order to complete this module item)" aria-label="Self-Study Video 10.11: Chrome IDE Introduction (14:55) (Must view in order to complete this module item)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Self-Study Video 10.11: Chrome IDE Introduction (14:55) ((Must view in order to complete this module item))</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571775"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571775" title="Self-Study Discussion 10.4: Thinking Like a Data Scientist: Software Engineering Basics (30:00) (Not yet completed)" aria-label="Self-Study Discussion 10.4: Thinking Like a Data Scientist: Software Engineering Basics (30:00) (Not yet completed)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Self-Study Discussion 10.4: Thinking Like a Data Scientist: Software Engineering Basics (30:00) ((Not yet completed))</span><i class="icon-discussion" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571776"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571776" title="Self-Study Flashcards: Module 10 Flashcards (30:00) (Must view in order to complete this module item)" aria-label="Self-Study Flashcards: Module 10 Flashcards (30:00) (Must view in order to complete this module item)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Self-Study Flashcards: Module 10 Flashcards (30:00) ((Must view in order to complete this module item))</span><i class="icon-document" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571777"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571777" title="Module 10: Feedback Survey, Quiz (Must submit the Quiz)" aria-label="Module 10: Feedback Survey, Quiz (Must submit the Quiz)" class="bs-page-link  dp-tooltip bs-bg-warning"><i class="icon-minimize kl_progress_complete" style="color: black;"></i>&nbsp;<span class="screenreader-only">Module 10: Feedback Survey ((Must submit the Quiz))</span><i class="icon-quiz" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571778"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571778" title="Module 10: Q&amp;A Discussion (Not yet completed)" aria-label="Module 10: Q&amp;A Discussion (Not yet completed)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Module 10: Q&amp;A Discussion ((Not yet completed))</span><i class="icon-discussion" aria-hidden="true"></i></a></li><li class="kl_pending bs-page-item kl_mod_item_1571779"><a href="https://classroom.emeritus.org/courses/7372/modules/items/1571779" title="Additional Resources                                                                                         (Must view in order to complete this module item)" aria-label="Additional Resources                                                                                         (Must view in order to complete this module item)" class="bs-page-link  dp-tooltip"><i class="far fa-circle kl_progress_complete"></i>&nbsp;<span class="screenreader-only">Additional Resources                                                                                         ((Must view in order to complete this module item))</span><i class="icon-document" aria-hidden="true"></i></a></li></ol></div>
+</div>
+<div style="background-color: #efefef;">
+<h4><span style="color: #a31f34;"><strong> <img id="1717093" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/Module Outcomes.png" alt="Module Outcomes.png" width="44" height="44" data-api-endpoint="https://classroom.emeritus.org/api/v1/courses/7372/files/2246168" data-api-returntype="File">Learning Outcome Addressed:</strong></span></h4>
+<ol start="4">
+<li><span> Create a Docker <em>image</em>.</span></li>
+</ol>
+</div>
+<p>In this activity, you will be using Visual Studio (VS) Code to create an <em>image </em>for a web application that displays “Hello World - my first Docker Image!”. Make sure to install the Docker extension for VS Code:</p>
+<p><img id="2213508" style="display: block; margin-left: auto; margin-right: auto;" title="Download the Docker extension for Visual Studio Code." src="./Activity 10.1_ Creating a Docker Image (45_00)_files/A1.png" alt="Download the Docker extension for Visual Studio Code." data-api-endpoint="https://classroom.emeritus.org/api/v1/courses/7372/files/2535319" data-api-returntype="File"></p>
+<p><span>Prior to beginning this activity, be sure to review the submission instructions below to ensure that you collect the required screenshots as you progress through the activity.</span></p>
+<p>To complete the activity, perform the following steps:</p>
+<ol>
+<li>Download the following starter file to your local machine: <span><a class="inline_disabled" title="Assignment 10.1 - Docker Image.zip" href="https://classroom.emeritus.org/courses/7372/files/2535383/download" data-api-endpoint="https://classroom.emeritus.org/api/v1/courses/7372/files/2535383" data-api-returntype="File">Assignment 10.1 - Docker Image.zip</a>. The zip file contains the initial code for this activity.</span></li>
+<li>Open the folder in Visual Studio Code:
+<p><img id="2213509" style="display: block; margin-left: auto; margin-right: auto;" title="Open the starter zip file in Visual Studio Code." src="./Activity 10.1_ Creating a Docker Image (45_00)_files/A2.png" alt="Open the starter zip file in Visual Studio Code." data-api-endpoint="https://classroom.emeritus.org/api/v1/courses/7372/files/2535221" data-api-returntype="File"></p>
+</li>
+<li>
+<p>Add a file called “Dockerfile” and copy the following contents to the file:</p>
+<table style="margin-left: auto; margin-right: auto;" width="624">
+<tbody>
+<tr>
+<td style="border: 1px solid black;" width="624">
+<p><span style="font-family: &#39;courier new&#39;, courier;">FROM node:12.16.3</span></p>
+<p><span style="font-family: &#39;courier new&#39;, courier;">WORKDIR /code</span></p>
+<p><span style="font-family: &#39;courier new&#39;, courier;">ENV PORT 80</span></p>
+<p><span style="font-family: &#39;courier new&#39;, courier;">COPY package.json /code/package.json</span></p>
+<p><span style="font-family: &#39;courier new&#39;, courier;">RUN npm install</span></p>
+<p><span style="font-family: &#39;courier new&#39;, courier;">COPY . /code/</span></p>
+<p><span style="font-family: &#39;courier new&#39;, courier;">CMD [ "node", "src/server.js"]</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Make sure to add the Dockerfile file in the folder “Assignment 10.1 - Docker Image” and to save it after editing it. The Dockerfile contains instructions for the Docker engine to create the Docker <em>image</em>. For more information regarding the contents of the Dockerfile, refer to this video from the 2020 DockerCon: <span><a class="inline_disabled external" href="https://youtu.be/iqqDU2crIEQ" target="_blank" rel="noreferrer noopener"><span>How to Get Started with Docker</span><span class="external_link_icon" style="margin-inline-start: 5px; " role="presentation"><svg viewBox="0 0 1920 1920" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width:1em; height:1em; vertical-align:middle; fill:currentColor">
+    <path d="M1226.66667,267 C1314.88,267 1386.66667,338.786667 1386.66667,427 L1386.66667,427 L1386.66667,853.666667 L1280,853.666667 L1280,693.666667 L106.666667,693.666667 L106.666667,1493.66667 C106.666667,1523 130.56,1547 160,1547 L160,1547 L1226.66667,1547 C1256.10667,1547 1280,1523 1280,1493.66667 L1280,1493.66667 L1280,1280.33333 L1386.66667,1280.33333 L1386.66667,1493.66667 C1386.66667,1581.88 1314.88,1653.66667 1226.66667,1653.66667 L1226.66667,1653.66667 L160,1653.66667 C71.7866667,1653.66667 0,1581.88 0,1493.66667 L0,1493.66667 L0,427 C0,338.786667 71.7866667,267 160,267 L160,267 Z M1584.37333,709.293333 L1904.37333,1029.29333 C1925.17333,1050.09333 1925.17333,1083.90667 1904.37333,1104.70667 L1904.37333,1104.70667 L1584.37333,1424.70667 L1508.96,1349.29333 L1737.86667,1120.38667 L906.613333,1120.38667 L906.613333,1013.72 L1737.86667,1013.72 L1508.96,784.706667 L1584.37333,709.293333 Z M1226.66667,373.666667 L160,373.666667 C130.56,373.666667 106.666667,397.666667 106.666667,427 L106.666667,427 L106.666667,587 L1280,587 L1280,427 C1280,397.666667 1256.10667,373.666667 1226.66667,373.666667 L1226.66667,373.666667 Z" stroke="none" stroke-width="1" fill-rule="evenodd"></path>
+</svg>
+<span class="screenreader-only">Links to an external site.</span></span></a>.</span></p>
+</li>
+<li>Now you are ready to start creating an <em>image</em> of this web application. You will need to go to the command line to run the Docker commands to create an <em>image</em>. In Visual Studio Code, navigate to Terminal. Then, select New Terminal:
+<p><img id="2213510" style="display: block; margin-left: auto; margin-right: auto;" title="Open a new terminal in Visual Studio Code." src="./Activity 10.1_ Creating a Docker Image (45_00)_files/A3.png" alt="Open a new terminal in Visual Studio Code." data-api-endpoint="https://classroom.emeritus.org/api/v1/courses/7372/files/2535222" data-api-returntype="File"></p>
+</li>
+<li>Run the following command from the prompt to create an <em>image</em>:
+<p>Note: When you run this command, you should be in the same folder where you downloaded the <span><a class="inline_disabled" title="Assignment 10.1 - Docker Image.zip" href="https://classroom.emeritus.org/courses/7372/files/2535383/download" data-api-endpoint="https://classroom.emeritus.org/api/v1/courses/7372/files/2535383" data-api-returntype="File">Assignment 10.1 - Docker Image.zip</a> starter file. This should also be the same folder where you created the Dockerfile. The space at the end of the </span><span style="font-family: &#39;courier new&#39;, courier;">docker build</span> command (“<span style="font-family: &#39;courier new&#39;, courier;">.</span>”) means “current directory”.</p>
+<table style="margin-left: auto; margin-right: auto;" width="624">
+<tbody>
+<tr>
+<td style="border: 1px solid black;" width="624">
+<p><span style="font-family: &#39;courier new&#39;, courier;">docker build --tag hello-world.</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><img id="2213511" style="display: block; margin-left: auto; margin-right: auto;" title="Assignment 10.1 - Docker Image Dockerfile." src="./Activity 10.1_ Creating a Docker Image (45_00)_files/A4.png" alt="Assignment 10.1 - Docker Image Dockerfile." data-api-endpoint="https://classroom.emeritus.org/api/v1/courses/7372/files/2535269" data-api-returntype="File"></p>
+</li>
+<li>
+<p>You should now have created a Docker<em> image</em> for the Hello World application. To view the Docker <em>image</em>, run the following command from the prompt:</p>
+<table style="margin-left: auto; margin-right: auto;" width="624">
+<tbody>
+<tr>
+<td style="border: 1px solid black;" width="624">
+<p><span style="font-family: &#39;courier new&#39;, courier;">docker images</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Now you can run your <em>image</em>. Execute the following command from the prompt:</p>
+<table style="margin-left: auto; margin-right: auto;" width="624">
+<tbody>
+<tr>
+<td style="border: 1px solid black;" width="624">
+<p><span style="font-family: &#39;courier new&#39;, courier;">docker run -p 8080:80 --name hello -d hello-world</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note: For a detailed description of each Docker command, including explanations of each of the options, you can run <span style="font-family: &#39;courier new&#39;, courier;">--help</span> for each of the commands. See the following example:</p>
+<table style="margin-left: auto; margin-right: auto;" width="624">
+<tbody>
+<tr>
+<td style="border: 1px solid black;" width="624">
+<p><span style="font-family: &#39;courier new&#39;, courier;">docker run --help</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Next, open your browser and navigate to the URL of http://localhost:8080/<span>.</span></p>
+<p>Your “Hello World - my first Docker Image!” page will be displayed.</p>
+</li>
+</ol>
+<p>Congratulations! You created your first Docker <em>image, </em>and you also ran the<em> image</em> from inside the Docker <em>container</em>.</p>
+<p>Submission Instructions:</p>
+<p>Your submission for this activity should be a Word document that includes the following screenshots, each labeled for the step that the screenshot represents:</p>
+<ol>
+<li>Dockerfile added to the “Activity 10.1 - Docker Image” folder.</li>
+<li><span>Screenshot of running the </span><span style="font-family: &#39;courier new&#39;, courier;">docker build</span><span> command.</span></li>
+<li><span>Screenshot of running the </span><span style="font-family: &#39;courier new&#39;, courier;">docker images</span><span> command.</span></li>
+<li><span>Screenshot of running the </span><span style="font-family: &#39;courier new&#39;, courier;">docker run</span><span> command to run the <em>image</em> in the <em>container</em>.</span></li>
+<li><span>Screenshot of a web browser to show that you have navigated to the URL of http://localhost:8080/. The web page should display “Hello World - my first Docker Image!”</span></li>
+</ol>
+<p><span>Additional Details: </span></p>
+<ul>
+<li><span>Estimated completion time: 45 min</span></li>
+<li><em>This is a required activity and counts toward course completion.</em></li>
+</ul></div>
+<div style="display: none;">
+<span class="timestamp">1718209799</span>
+<span class="due_date_string">06/12/2024</span>
+<span class="due_time_string">04:29pm</span>
+</div>
+</div>
+<div style="display: none;" id="submit_assignment" data-context_code="course_7372" data-asset_string="assignment_220483">
+<div class="content" id="submit_assignment_tabs">
+<ul>
+<li><a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#submit_online_upload_form" class="submit_online_upload_option">Carga del archivo</a></li>
+</ul>
+<form id="submit_online_upload_form" class="submit_assignment_form" enctype="multipart/form-data" action="https://classroom.emeritus.org/courses/7372/assignments/220483/submissions" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="JNNdnl6Pv+ngWSdVC2/p0RtqkKavjn3BVqBX8bck6j0UqRWnLP7ckLcTHwFdPIfmQSvexfz3PvQizTi+1GOtWw==">
+<input value="online_upload" type="hidden" name="submission[submission_type]" id="submission_submission_type">
+<input value="" id="submission_attachment_ids" type="hidden" name="submission[attachment_ids]">
+<input id="eula_agreement_timestamp" type="hidden" name="submission[eula_agreement_timestamp]">
+<table class="formtable" style="width: 100%;">
+<tbody><tr>
+<td colspan="2">
+Cargue un archivo o escoja un archivo ya cargado.
+</td>
+</tr><tr>
+<td colspan="2">
+<span style="visibility: hidden"><label id="attachmentLabel" for="attachment_uploaded_data">Archivo:</label></span>
+<div class="submission_attachment" style="margin-bottom: 1em; display: block;">
+<div class="attachment_wrapper" style="display: inline-block;"><button cursor="pointer" type="button" tabindex="0" class="fOyUs_bGBk fOyUs_fKyb fOyUs_cuDs fOyUs_cBHs fOyUs_eWbJ fOyUs_fmDy fOyUs_eeJl fOyUs_cBtr fOyUs_fuTR fOyUs_cnfU fQfxa_bGBk" style="margin: 0px; padding: 0px; border-radius: 0.25rem; border-width: 0px; width: auto; cursor: pointer;"><span class="fQfxa_caGd fQfxa_fKcQ fQfxa_buuG fQfxa_ImeN undefined fQfxa_dqAF"><span direction="row" wrap="no-wrap" class="fOyUs_bGBk fOyUs_desw bDzpk_bGBk bDzpk_eRIA bDzpk_fZWR bDzpk_qOas" style="width: 100%; height: 100%;"><span class="fOyUs_bGBk dJCgj_bGBk" style="padding: 0px 0.5rem 0px 0px;"><span class="fQfxa_eoCh"><svg name="IconUpload" viewBox="0 0 1920 1920" rotate="0" width="1em" height="1em" aria-hidden="true" role="presentation" focusable="false" class="dUOHu_bGBk dUOHu_drOs dUOHu_eXrk cGqzL_bGBk" style="width: 1em; height: 1em;"><g role="presentation"><path d="M1838.86029,1451.57632 L1920,1532.94589 L1558.4341,1894.51179 L361.565904,1894.51179 L0,1532.94589 L81.2546391,1451.57632 L409.146414,1779.58302 L1510.85359,1779.58302 L1838.86029,1451.57632 Z M962.333054,25 L1462.61798,525.284928 L1381.47827,606.654495 L1019.68251,244.973662 L1019.68251,1432.53262 L904.86867,1432.53262 L904.86867,244.973662 L543.187837,606.654495 L462.048126,525.284928 L962.333054,25 Z" fill-rule="evenodd" stroke="none" stroke-width="1"></path></g></svg></span></span><span class="fOyUs_bGBk dJCgj_bGBk dJCgj_dfFp"><span class="fQfxa_biBD">Cargar archivo</span></span></span></span></button><button cursor="pointer" type="button" tabindex="0" class="fOyUs_bGBk fOyUs_fKyb fOyUs_cuDs fOyUs_cBHs fOyUs_eWbJ fOyUs_fmDy fOyUs_eeJl fOyUs_cBtr fOyUs_fuTR fOyUs_cnfU fQfxa_bGBk" style="margin: 0px 0.75rem; padding: 0px; border-radius: 0.25rem; border-width: 0px; width: auto; cursor: pointer;"><span class="fQfxa_caGd fQfxa_fKcQ fQfxa_buuG fQfxa_ImeN undefined fQfxa_dqAF"><span direction="row" wrap="no-wrap" class="fOyUs_bGBk fOyUs_desw bDzpk_bGBk bDzpk_eRIA bDzpk_fZWR bDzpk_qOas" style="width: 100%; height: 100%;"><span class="fOyUs_bGBk dJCgj_bGBk" style="padding: 0px 0.5rem 0px 0px;"><span class="fQfxa_eoCh"><svg name="IconImage" viewBox="0 0 1920 1920" rotate="0" width="1em" height="1em" aria-hidden="true" role="presentation" focusable="false" class="dUOHu_bGBk dUOHu_drOs dUOHu_eXrk cGqzL_bGBk" style="width: 1em; height: 1em;"><g role="presentation"><path d="M1920,113 L1920,1807.11765 L0,1807.11765 L0,113 L1920,113 Z M1807.05882,225.941176 L112.941176,225.941176 L112.941176,1694.28941 L1807.05882,1694.28941 L1807.05882,225.941176 Z M935.943529,1058.76941 C1118.79529,800.36 1268.44235,771.898824 1362.63529,793.922353 C1523.35059,831.305882 1634.71059,1036.18118 1693.44,1402.90118 L1693.44,1402.90118 L1703.94353,1468.29412 L207.924706,1468.29412 L228.028235,1396.57647 C313.411765,1090.50588 400.941176,939.503529 511.397647,906.863529 C613.948235,876.708235 696.734118,950.684706 770.258824,1015.96471 C813.854118,1054.47765 861.063529,1097.05647 892.8,1094.79765 C908.724706,1092.99059 924.988235,1074.24235 935.943529,1058.76941 Z M1337.11059,903.927059 C1254.09882,884.614118 1141.04471,964.689412 1028.21647,1123.93647 C992.978824,1173.74353 951.868235,1201.75294 905.901176,1207.06118 C829.674918,1216.08518 767.719319,1164.23433 707.088995,1110.79476 L703.220649,1107.38213 C700.642786,1105.10638 698.066824,1102.83002 695.491765,1100.55765 C641.28,1052.44471 584.809412,1003.54118 543.472941,1015.17412 C509.025882,1025.33882 441.148235,1084.29412 357.684706,1355.35294 L357.684706,1355.35294 L1570.44706,1355.35294 C1519.96235,1090.16706 1436.04706,926.967059 1337.11059,903.927059 Z M677.647059,338.882353 C802.221176,338.882353 903.529412,440.190588 903.529412,564.764706 C903.529412,689.338824 802.221176,790.647059 677.647059,790.647059 C553.072941,790.647059 451.764706,689.338824 451.764706,564.764706 C451.764706,440.190588 553.072941,338.882353 677.647059,338.882353 Z M677.647059,451.823529 C615.303529,451.823529 564.705882,502.534118 564.705882,564.764706 C564.705882,626.995294 615.303529,677.705882 677.647059,677.705882 C739.990588,677.705882 790.588235,626.995294 790.588235,564.764706 C790.588235,502.534118 739.990588,451.823529 677.647059,451.823529 Z" fill-rule="evenodd" stroke="none" stroke-width="1"></path></g></svg></span></span><span class="fOyUs_bGBk dJCgj_bGBk dJCgj_dfFp"><span class="fQfxa_biBD">Usar cámara web</span></span></span></span></button></div>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="remove_attachment_link no-hover" style="display: none;"><i class="icon-end" aria-hidden="true"></i><span class="screenreader-only">Eliminar el archivo adjunto vacío</span></a>
+</div><button class="Button Button--link add_another_file_link">
+<i class="icon-add" aria-hidden="true"></i>
+Agregue otro archivo
+</button>
+<div id="submission_attachment_blank" class="submission_attachment" style="display: none; margin-bottom: 1em;">
+<div class="attachment_wrapper" style="display: inline-block;"></div>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="remove_attachment_link no-hover" style="display: none;"><i class="icon-end" aria-hidden="true"></i><span class="screenreader-only">Eliminar el archivo adjunto vacío</span></a>
+</div>
+</td>
+</tr>
+<tr>
+<td></td>
+<td style="font-size: 0.8em;">
+<button class="Button Button--link toggle_uploaded_files_link">Haga clic aquí para encontrar un archivo que ya ha cargado</button><br>
+<div id="uploaded_files" style="display: none;">
+</div></td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="textarea-emoji-container">
+<div class="textarea-container">
+<textarea class="submission_comment_textarea" placeholder="Comentarios..." title="Comentarios adicionales" name="submission[comment]" id="submission_comment"></textarea>
+<span class="emoji-picker-container" style="display: none;"></span>
+</div>
+<div class="emoji-quick-picker-container" style="display: none;"></div>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="button-container">
+<button type="button" class="cancel_button btn">Cancelar</button>
+<button type="submit" class="btn btn-primary" id="submit_file_button">Entregar tarea</button>
+<span id="progress_indicator"></span>
+</td>
+</tr>
+</tbody></table>
+</form>
+<style>
+    #google_docs_tree li.folder {
+      cursor: pointer;
+    }
+    #google_docs_tree li.file {
+      cursor: pointer;
+      -moz-border-radius: 3px;
+      width: 80%;
+      padding-right: 20px;
+    }
+    #google_docs_tree li.file:hover {
+      background-color: #eee;
+    }
+    ul.instTree li span.active {
+      background: none;
+    }
+    #google_docs_tree li.file.leaf.active {
+      background-color: #ddd;
+    }
+    #google_docs_tree li.file .filename {
+      float: left;
+      max-width: 98%;
+    }
+    #google_docs_tree li.file .popout {
+      float: right;
+    }
+    </style>
+</div>
+</div>
+<div id="rubrics" class="mathjax_ignore" style="margin-bottom: 10px;">
+<div class="rubric_container rubric  for_grading" id="rubric_61789" style="">
+<div class="screenreader-only"><h2>Rúbrica</h2></div>
+<div class="rubric_title">
+<div style="display: none;" class="links displaying pull-right">
+<a href="https://classroom.emeritus.org/courses/7372/rubrics/61789?rubric_association_id=129711" class="copy_edit edit_rubric_link no-print no-hover" style="display: none;" title="Editar rúbrica" aria-label="Editar rúbrica" role="button"><i class="icon-edit standalone-icon"></i></a>
+<a href="https://classroom.emeritus.org/search/rubrics?q=" class="find_rubric_link no-print no-hover" style="display: none;" title="Encontrar otra rúbrica" aria-label="Encontrar otra rúbrica" role="button"><i class="icon-search standalone-icon"></i></a>
+<a href="https://classroom.emeritus.org/courses/7372/rubric_associations/129711" class="delete_rubric_link no-print no-hover" style="display: none;" title="Eliminar rúbrica" aria-label="Eliminar rúbrica" role="button"><i class="icon-trash standalone-icon"></i></a>
+<div style="display: none;">
+<div class="use_for_grading">true</div>
+<div class="free_form_criterion_comments">&nbsp;</div>
+<div class="hide_score_total">&nbsp;</div>
+<div class="hide_outcome_results">&nbsp;</div>
+<div class="hide_points">&nbsp;</div>
+<div class="rubric_association_id">129711</div>
+<div class="user_id">&nbsp;</div>
+<div class="assessment_type"></div>
+<a href="https://classroom.emeritus.org/courses/7372/rubric_associations/129711/assessments/%7B%7B%20assessment_id%20%7D%7D" rel="nofollow" class="edit_assessment_link">&nbsp;</a>
+<a href="https://classroom.emeritus.org/courses/7372/rubrics/%7B%7B%20rubric_id%20%7D%7D" class="edit_rubric_url">&nbsp;</a>
+<a href="https://classroom.emeritus.org/courses/7372/rubric_associations/%7B%7B%20association_id%20%7D%7D" class="delete_rubric_url">&nbsp;</a>
+</div>
+</div>
+<div style="float: right; font-size: 0.8em; display: none;" class="links displaying locked">
+<span style="">No puede cambiar una rúbrica una vez que ha comenzado a usarla.</span>
+<a href="https://classroom.emeritus.org/courses/7372/rubric_associations/%7B%7B%20association_id%20%7D%7D" class="delete_rubric_url" style="display: none;">&nbsp;</a>
+</div>
+<div class="editing" style="float: right;">
+<a href="https://classroom.emeritus.org/search/rubrics?q=" class="find_rubric_link icon-search" style="display: none;" title="Encontrar una rúbrica existente">Encontrar una rúbrica</a>
+</div>
+<div class="editing" style="text-align: left">
+<label for="rubric-title">Título:</label>
+<input id="rubric-title" type="text" class="no-margin-bottom" name="title" value="Activity 10.1" style="width: 200px;" maxlength="255" aria-label="Título:">
+<a href="https://classroom.emeritus.org/search/rubrics?q=" style="display: none;"><img alt="" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/find-6164443e2a.webp"> Encontrar rúbrica</a>
+<div class="editing" style="font-size: 0.8em;">Recuerde que 10 estudiantes ya han sido evaluados usando esta rúbrica. Si la cambia afectará sus evaluaciones.</div>
+</div>
+<div class="displaying">
+<span class="title" tabindex="-1">Activity 10.1</span>
+</div>
+<div class="has-assessments-warning" style="display: none;">
+Ya ha clasificado estudiantes con esta rúbrica. Cambios mayores podrían afectar sus resultados de evaluaciones.
+</div>
+</div>
+<table class="rubric_table">
+<caption>
+<div class="screenreader-only">
+<span class="title">Activity 10.1</span>
+</div>
+</caption>
+<thead>
+<tr>
+<th scope="col">Criterios</th>
+<th scope="col">Calificaciones</th>
+<th scope="col" class="toggle_for_hide_points ">
+Pts
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="criterion__3246" class="criterion   " style="">
+<td class="criterion_description hover-container pad-box-micro">
+<div class="container">
+<div class="links editing">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_criterion_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar descripción del criterio</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_criterion_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar fila de criterio</span></a>
+</div>
+<div class="description_content">
+<span class="outcome_sr_content" aria-hidden="true">
+<i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+<span class="screenreader-only">Este criterio depende de una competencia de aprendizaje</span>
+</span>
+<span class="description description_title">Add a Dockerfile to the “Activity 10.1 - Docker Image” folder.</span>
+<span class="learning_outcome_id" style="display: none;"></span>
+<span class="criterion_id" style="display: none;">_3246</span>
+<div class="long_description small_description"></div>
+<div class="hide_when_learning_outcome ">
+<div class="criterion_use_range_div editing toggle_for_hide_points ">
+<label>Rango
+<input type="checkbox" class="criterion_use_range"></label>
+</div>
+</div>
+<div class="threshold toggle_for_hide_points ">
+límite:
+<span class="mastery_points"></span> pts
+</div>
+</div>
+</div>
+</td>
+<td style="padding: 0;">
+<table class="ratings" style=""><tbody><tr>
+<td class="rating edge_rating
+                
+                ">
+<div class="container" style="height: 124px;">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">4</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0.0</span></span> pts
+</span>
+<div class="description rating_description_value">Complete</div>
+<div class="rating_long_description small_description">The Dockerfile has been added to the folder “Activity 10.1 - Docker Image”.</div>
+<span class="rating_id" style="display: none;">blank</span>
+</div>
+<div class="editing links add_rating_link">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="add_rating_link_after" aria-label="Agregar calificación"><i class="icon-add icon-Solid"></i></a>
+</div>
+</div>
+</td>
+<td class="rating edge_rating
+                infinitesimal
+                ">
+<div class="container" style="height: 124px;">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">0</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Incomplete</div>
+<div class="rating_long_description small_description">The Dockerfile has not been created or added to the “Activity 10.1 - Docker Image” folder.</div>
+<span class="rating_id" style="display: none;">blank_2</span>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+Esta área será usada por el evaluador para que pueda dejar comentarios relacionados al criterio.
+</div>
+</td>
+<td class="nobr points_form toggle_for_hide_points ">
+<div class="editing" style="white-space: normal">
+<span style="white-space: nowrap; font-size: 0.8em">
+<input type="text" aria-label="Puntos" value="4" class="criterion_points span1 no-margin-bottom">
+pts
+</span><br>
+</div>
+<div class="displaying">
+<span style="white-space: nowrap;">
+<span class="criterion_rating_points_holder" style="display: none;">
+<span class="criterion_rating_points">&nbsp;</span> /
+</span>
+<span class="display_criterion_points">4</span> pts<br>
+</span>
+</div>
+<div class="ignoring">
+<span> -- </span>
+</div>
+<div class="criterion_comments">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="no-hover criterion_comments_link" title="Comentarios adicionales">
+<img alt="Comentarios adicionales" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/rubric_comment-ddae8546ab.webp">
+</a>
+<div class="custom_rating" style="display: none;"></div>
+</div>
+</td>
+</tr>
+<tr id="criterion__5490" class="criterion   " style="">
+<td class="criterion_description hover-container pad-box-micro">
+<div class="container">
+<div class="links editing">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_criterion_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar descripción del criterio</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_criterion_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar fila de criterio</span></a>
+</div>
+<div class="description_content">
+<span class="outcome_sr_content" aria-hidden="true">
+<i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+<span class="screenreader-only">Este criterio depende de una competencia de aprendizaje</span>
+</span>
+<span class="description description_title">Run the docker build command and include a screenshot of the output.</span>
+<span class="learning_outcome_id" style="display: none;"></span>
+<span class="criterion_id" style="display: none;">_5490</span>
+<div class="long_description small_description"></div>
+<div class="hide_when_learning_outcome ">
+<div class="criterion_use_range_div editing toggle_for_hide_points ">
+<label>Rango
+<input type="checkbox" class="criterion_use_range"></label>
+</div>
+</div>
+<div class="threshold toggle_for_hide_points ">
+límite:
+<span class="mastery_points"></span> pts
+</div>
+</div>
+</div>
+</td>
+<td style="padding: 0;">
+<table class="ratings" style=""><tbody><tr>
+<td class="rating edge_rating
+                
+                ">
+<div class="container" style="height: 124px;">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">4</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0.0</span></span> pts
+</span>
+<div class="description rating_description_value">Complete</div>
+<div class="rating_long_description small_description">A screenshot containing the execution of the docker build command is included.</div>
+<span class="rating_id" style="display: none;">_7896</span>
+</div>
+<div class="editing links add_rating_link">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="add_rating_link_after" aria-label="Agregar calificación"><i class="icon-add icon-Solid"></i></a>
+</div>
+</div>
+</td>
+<td class="rating edge_rating
+                infinitesimal
+                ">
+<div class="container" style="height: 124px;">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">0</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Incomplete</div>
+<div class="rating_long_description small_description">A screenshot containing the execution of the docker build command is not included.</div>
+<span class="rating_id" style="display: none;">_352</span>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+Esta área será usada por el evaluador para que pueda dejar comentarios relacionados al criterio.
+</div>
+</td>
+<td class="nobr points_form toggle_for_hide_points ">
+<div class="editing" style="white-space: normal">
+<span style="white-space: nowrap; font-size: 0.8em">
+<input type="text" aria-label="Puntos" value="4" class="criterion_points span1 no-margin-bottom">
+pts
+</span><br>
+</div>
+<div class="displaying">
+<span style="white-space: nowrap;">
+<span class="criterion_rating_points_holder" style="display: none;">
+<span class="criterion_rating_points">&nbsp;</span> /
+</span>
+<span class="display_criterion_points">4</span> pts<br>
+</span>
+</div>
+<div class="ignoring">
+<span> -- </span>
+</div>
+<div class="criterion_comments">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="no-hover criterion_comments_link" title="Comentarios adicionales">
+<img alt="Comentarios adicionales" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/rubric_comment-ddae8546ab.webp">
+</a>
+<div class="custom_rating" style="display: none;"></div>
+</div>
+</td>
+</tr>
+<tr id="criterion__9056" class="criterion   " style="">
+<td class="criterion_description hover-container pad-box-micro">
+<div class="container">
+<div class="links editing">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_criterion_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar descripción del criterio</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_criterion_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar fila de criterio</span></a>
+</div>
+<div class="description_content">
+<span class="outcome_sr_content" aria-hidden="true">
+<i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+<span class="screenreader-only">Este criterio depende de una competencia de aprendizaje</span>
+</span>
+<span class="description description_title">Run the docker images command and include a screenshot of the output.</span>
+<span class="learning_outcome_id" style="display: none;"></span>
+<span class="criterion_id" style="display: none;">_9056</span>
+<div class="long_description small_description"></div>
+<div class="hide_when_learning_outcome ">
+<div class="criterion_use_range_div editing toggle_for_hide_points ">
+<label>Rango
+<input type="checkbox" class="criterion_use_range"></label>
+</div>
+</div>
+<div class="threshold toggle_for_hide_points ">
+límite:
+<span class="mastery_points"></span> pts
+</div>
+</div>
+</div>
+</td>
+<td style="padding: 0;">
+<table class="ratings" style=""><tbody><tr>
+<td class="rating edge_rating
+                
+                ">
+<div class="container" style="height: 144px;">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">4</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0.0</span></span> pts
+</span>
+<div class="description rating_description_value">Complete</div>
+<div class="rating_long_description small_description">A screenshot containing the execution of the docker images command, which contains information about the newly created image, is included.</div>
+<span class="rating_id" style="display: none;">_8421</span>
+</div>
+<div class="editing links add_rating_link">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="add_rating_link_after" aria-label="Agregar calificación"><i class="icon-add icon-Solid"></i></a>
+</div>
+</div>
+</td>
+<td class="rating edge_rating
+                infinitesimal
+                ">
+<div class="container" style="height: 144px;">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">0</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Incomplete</div>
+<div class="rating_long_description small_description">A screenshot containing the execution of the docker images command is not included.</div>
+<span class="rating_id" style="display: none;">_942</span>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+Esta área será usada por el evaluador para que pueda dejar comentarios relacionados al criterio.
+</div>
+</td>
+<td class="nobr points_form toggle_for_hide_points ">
+<div class="editing" style="white-space: normal">
+<span style="white-space: nowrap; font-size: 0.8em">
+<input type="text" aria-label="Puntos" value="4" class="criterion_points span1 no-margin-bottom">
+pts
+</span><br>
+</div>
+<div class="displaying">
+<span style="white-space: nowrap;">
+<span class="criterion_rating_points_holder" style="display: none;">
+<span class="criterion_rating_points">&nbsp;</span> /
+</span>
+<span class="display_criterion_points">4</span> pts<br>
+</span>
+</div>
+<div class="ignoring">
+<span> -- </span>
+</div>
+<div class="criterion_comments">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="no-hover criterion_comments_link" title="Comentarios adicionales">
+<img alt="Comentarios adicionales" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/rubric_comment-ddae8546ab.webp">
+</a>
+<div class="custom_rating" style="display: none;"></div>
+</div>
+</td>
+</tr>
+<tr id="criterion__9110" class="criterion   " style="">
+<td class="criterion_description hover-container pad-box-micro">
+<div class="container">
+<div class="links editing">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_criterion_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar descripción del criterio</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_criterion_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar fila de criterio</span></a>
+</div>
+<div class="description_content">
+<span class="outcome_sr_content" aria-hidden="true">
+<i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+<span class="screenreader-only">Este criterio depende de una competencia de aprendizaje</span>
+</span>
+<span class="description description_title">Run the docker run command to run the image in the container and include a screenshot of the output.</span>
+<span class="learning_outcome_id" style="display: none;"></span>
+<span class="criterion_id" style="display: none;">_9110</span>
+<div class="long_description small_description"></div>
+<div class="hide_when_learning_outcome ">
+<div class="criterion_use_range_div editing toggle_for_hide_points ">
+<label>Rango
+<input type="checkbox" class="criterion_use_range"></label>
+</div>
+</div>
+<div class="threshold toggle_for_hide_points ">
+límite:
+<span class="mastery_points"></span> pts
+</div>
+</div>
+</div>
+</td>
+<td style="padding: 0;">
+<table class="ratings" style=""><tbody><tr>
+<td class="rating edge_rating
+                
+                ">
+<div class="container" style="height: 124px;">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">4</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0.0</span></span> pts
+</span>
+<div class="description rating_description_value">Complete</div>
+<div class="rating_long_description small_description">A screenshot containing the execution of the docker run command is included.</div>
+<span class="rating_id" style="display: none;">_6045</span>
+</div>
+<div class="editing links add_rating_link">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="add_rating_link_after" aria-label="Agregar calificación"><i class="icon-add icon-Solid"></i></a>
+</div>
+</div>
+</td>
+<td class="rating edge_rating
+                infinitesimal
+                ">
+<div class="container" style="height: 124px;">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">0</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Incomplete</div>
+<div class="rating_long_description small_description">A screenshot of the docker run command is not included.</div>
+<span class="rating_id" style="display: none;">_1214</span>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+Esta área será usada por el evaluador para que pueda dejar comentarios relacionados al criterio.
+</div>
+</td>
+<td class="nobr points_form toggle_for_hide_points ">
+<div class="editing" style="white-space: normal">
+<span style="white-space: nowrap; font-size: 0.8em">
+<input type="text" aria-label="Puntos" value="4" class="criterion_points span1 no-margin-bottom">
+pts
+</span><br>
+</div>
+<div class="displaying">
+<span style="white-space: nowrap;">
+<span class="criterion_rating_points_holder" style="display: none;">
+<span class="criterion_rating_points">&nbsp;</span> /
+</span>
+<span class="display_criterion_points">4</span> pts<br>
+</span>
+</div>
+<div class="ignoring">
+<span> -- </span>
+</div>
+<div class="criterion_comments">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="no-hover criterion_comments_link" title="Comentarios adicionales">
+<img alt="Comentarios adicionales" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/rubric_comment-ddae8546ab.webp">
+</a>
+<div class="custom_rating" style="display: none;"></div>
+</div>
+</td>
+</tr>
+<tr id="criterion__2284" class="criterion   " style="">
+<td class="criterion_description hover-container pad-box-micro">
+<div class="container">
+<div class="links editing">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_criterion_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar descripción del criterio</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_criterion_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar fila de criterio</span></a>
+</div>
+<div class="description_content">
+<span class="outcome_sr_content" aria-hidden="true">
+<i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+<span class="screenreader-only">Este criterio depende de una competencia de aprendizaje</span>
+</span>
+<span class="description description_title">Screenshot of a web browser to show that you have navigated to the URL of http://localhost:8080/. The web page should display “Hello World - my first Docker Image!”</span>
+<span class="learning_outcome_id" style="display: none;"></span>
+<span class="criterion_id" style="display: none;">_2284</span>
+<div class="long_description small_description"></div>
+<div class="hide_when_learning_outcome ">
+<div class="criterion_use_range_div editing toggle_for_hide_points ">
+<label>Rango
+<input type="checkbox" class="criterion_use_range"></label>
+</div>
+</div>
+<div class="threshold toggle_for_hide_points ">
+límite:
+<span class="mastery_points"></span> pts
+</div>
+</div>
+</div>
+</td>
+<td style="padding: 0;">
+<table class="ratings" style=""><tbody><tr>
+<td class="rating edge_rating
+                
+                ">
+<div class="container" style="height: 165px;">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">4</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0.0</span></span> pts
+</span>
+<div class="description rating_description_value">Complete</div>
+<div class="rating_long_description small_description">A screenshot of a web browser by navigating to the URL of your localhost. The web page should display “Hello World - my first Docker Image!”</div>
+<span class="rating_id" style="display: none;">_1014</span>
+</div>
+<div class="editing links add_rating_link">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="add_rating_link_after" aria-label="Agregar calificación"><i class="icon-add icon-Solid"></i></a>
+</div>
+</div>
+</td>
+<td class="rating edge_rating
+                infinitesimal
+                ">
+<div class="container" style="height: 165px;">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">0</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Incomplete</div>
+<div class="rating_long_description small_description">A screenshot of a web browser that displays “Hello World - my first Docker Image!” is not included.</div>
+<span class="rating_id" style="display: none;">_5658</span>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+Esta área será usada por el evaluador para que pueda dejar comentarios relacionados al criterio.
+</div>
+</td>
+<td class="nobr points_form toggle_for_hide_points ">
+<div class="editing" style="white-space: normal">
+<span style="white-space: nowrap; font-size: 0.8em">
+<input type="text" aria-label="Puntos" value="4" class="criterion_points span1 no-margin-bottom">
+pts
+</span><br>
+</div>
+<div class="displaying">
+<span style="white-space: nowrap;">
+<span class="criterion_rating_points_holder" style="display: none;">
+<span class="criterion_rating_points">&nbsp;</span> /
+</span>
+<span class="display_criterion_points">4</span> pts<br>
+</span>
+</div>
+<div class="ignoring">
+<span> -- </span>
+</div>
+<div class="criterion_comments">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="no-hover criterion_comments_link" title="Comentarios adicionales">
+<img alt="Comentarios adicionales" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/rubric_comment-ddae8546ab.webp">
+</a>
+<div class="custom_rating" style="display: none;"></div>
+</div>
+</td>
+</tr>
+<tr id="criterion_blank" class="criterion blank  " style="display: none;">
+<td class="criterion_description hover-container pad-box-micro">
+<div class="container">
+<div class="links editing">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_criterion_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar descripción del criterio</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_criterion_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar fila de criterio</span></a>
+</div>
+<div class="description_content">
+<span class="outcome_sr_content" aria-hidden="true">
+<i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+<span class="screenreader-only">Este criterio depende de una competencia de aprendizaje</span>
+</span>
+<span class="description description_title">Descripción del criterio</span>
+<span class="learning_outcome_id" style="display: none;"></span>
+<span class="criterion_id" style="display: none;"></span>
+<div class="long_description small_description"></div>
+<div class="hide_when_learning_outcome ">
+<div class="criterion_use_range_div editing toggle_for_hide_points ">
+<label>Rango
+<input type="checkbox" class="criterion_use_range"></label>
+</div>
+</div>
+<div class="threshold toggle_for_hide_points ">
+límite:
+<span class="mastery_points">5</span> pts
+</div>
+</div>
+</div>
+</td>
+<td style="padding: 0;">
+<table class="ratings" style=""><tbody><tr>
+<td class="rating edge_rating
+                
+                ">
+<div class="container">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">5</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Con marcas</div>
+<div class="rating_long_description small_description"></div>
+<span class="rating_id" style="display: none;">blank</span>
+</div>
+<div class="editing links add_rating_link">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="add_rating_link_after" aria-label="Agregar calificación"><i class="icon-add icon-Solid"></i></a>
+</div>
+</div>
+</td>
+<td class="rating edge_rating
+                infinitesimal
+                ">
+<div class="container">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">0</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Sin marcas</div>
+<div class="rating_long_description small_description"></div>
+<span class="rating_id" style="display: none;">blank_2</span>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+Esta área será usada por el evaluador para que pueda dejar comentarios relacionados al criterio.
+</div>
+</td>
+<td class="nobr points_form toggle_for_hide_points ">
+<div class="editing" style="white-space: normal">
+<span style="white-space: nowrap; font-size: 0.8em">
+<input type="text" aria-label="Puntos" value="5" class="criterion_points span1 no-margin-bottom">
+pts
+</span><br>
+</div>
+<div class="displaying">
+<span style="white-space: nowrap;">
+<span class="criterion_rating_points_holder" style="display: none;">
+<span class="criterion_rating_points">&nbsp;</span> /
+</span>
+<span class="display_criterion_points">5</span> pts<br>
+</span>
+</div>
+<div class="ignoring">
+<span> -- </span>
+</div>
+<div class="criterion_comments">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="no-hover criterion_comments_link" title="Comentarios adicionales">
+<img alt="Comentarios adicionales" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/rubric_comment-ddae8546ab.webp">
+</a>
+<div class="custom_rating" style="display: none;"></div>
+</div>
+</td>
+</tr>
+<tr class="summary">
+<td colspan="4">
+<div class="total_points_holder toggle_for_hide_points " style="float: right; ">
+<span>Puntos totales:
+<span class="rubric_total">
+20
+</span>
+<span class="assessing">de 20</span> </span>
+</div>
+<div class="editing pull-left">
+<span id="add_criterion_holder" class="criterion_link"></span>
+</div>
+<div class="clear"></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<table style="display: none;">
+<tbody><tr id="edit_rubric">
+<td colspan="4">
+<form id="edit_rubric_form" class="edit-rubric-form no-margin-bottom">
+<div class="rubric_custom_ratings" style="">
+<input type="checkbox" id="rubric_custom_rating" class="rubric_custom_rating">
+<label for="rubric_custom_rating">Escribiré comentarios sin formato al evaluar a los estudiantes</label>
+</div>
+<div class="hide_points" style="">
+<input type="checkbox" id="hide_points" class="hide_points_checkbox">
+<label for="hide_points">Eliminar puntos de la rúbrica</label>
+</div>
+<div class="hide_outcome_results" style="">
+<input type="checkbox" id="hide_outcome_results" class="hide_outcome_results_checkbox">
+<label for="hide_outcome_results">No publicar los resultados en el Libro de calificaciones para el dominio del aprendizaje</label>
+</div>
+<div class="rubric_grading" style="">
+<input type="checkbox" id="grading_rubric" class="grading_rubric_checkbox" checked="">
+<label for="grading_rubric">Usar esta rúbrica para calificar las tareas</label>
+</div>
+<div class="totalling_rubric" style="">
+<input type="checkbox" id="totalling_rubric" class="totalling_rubric_checkbox">
+<label for="totalling_rubric">Ocultar el puntaje total para los resultados de evaluaciones</label>
+</div>
+<div class="ic-Action-header ic-Action-header--half-margin">
+<div class="ic-Action-header__Primary">
+<button type="button" class="Button cancel_button">Cancelar</button>
+<button type="submit" class="Button Button--primary save_button">Crear rúbrica</button>
+</div>
+</div>
+</form>
+</td>
+</tr>
+</tbody></table>
+<div style="display: none;" id="rubric_parameters">
+<input type="hidden" name="rubric_association[association_type]" value="Assignment">
+<input type="hidden" name="rubric_association[association_id]" value="220483">
+<input type="hidden" name="rubric_association[purpose]" value="grading">
+</div>
+<div id="rubric_long_description_dialog" style="display: none;">
+<div class="editing">
+<form id="edit_criterion_form" class="no-margin-bottom">
+<div>
+<label class="rating_form_label">Descripción
+<textarea class="description" rows="1" name="description"></textarea>
+</label>
+</div>
+<div>
+<label class="rating_form_label">Descripción completa
+<textarea class="long_description" rows="4" name="long_description"></textarea>
+</label>
+</div>
+<div class="button-container">
+<button type="button" class="btn btn button-secondary cancel_button">Cancelar</button>
+<button type="button" class="btn save_button btn-primary">Actualizar criterio</button>
+</div>
+</form>
+</div>
+<div class="displaying">
+<div class="long_description">
+</div>
+</div>
+</div>
+<div id="rubric_criterion_comments_dialog" style="display: none;">
+<div class="criterion_description" style="border-bottom: 1px solid #ccc; padding: 5px 0; font-size: 1.2em; font-weight: bold; margin-bottom: 5px;" tabindex="-1"></div>
+<div class="editing">
+<label for="criterion_comments_textarea">
+Comentarios adicionales:
+</label>
+<textarea id="criterion_comments_textarea" class="criterion_comments" name="criterion_comments" style="width: 370px;"></textarea>
+<div class="button-container">
+<button type="button" class="btn btn button-secondary cancel_button">Cancelar</button>
+<button type="button" class="btn save_button">Actualizar comentarios</button>
+</div>
+</div>
+<div class="displaying">
+Comentarios adicionales:
+<div class="criterion_comments" style="margin-top: 10px;">
+</div>
+</div>
+</div>
+<div id="rubric_rating_dialog" style="display: none;">
+<div class="description" style="border-bottom: 1px solid #ccc; padding: 5px 0; font-size: 1.2em; font-weight: bold; margin-bottom: 5px;">
+<span id="edit_rating_form_criterion_description"></span>
+</div>
+<div class="editing">
+<form id="edit_rating_form" class="no-margin-bottom">
+<div class="toggle_for_hide_points">
+<div><label id="rating_form_score_label" class="rating_form_label">Puntaje de la calificación</label></div>
+<span id="rating_form_max_score_label" hidden="">Puntaje máx. de la calificación</span>
+<input id="points" aria-labelledby="rating_form_score_label" type="text" size="2" name="points" class="no-margin-bottom span1">
+<span class="range_rating">para &gt;
+<input aria-label="Puntaje mín. de la calificación" type="text" size="2" name="min_points" class="no-margin-bottom span1 min_points" placeholder="mín.">
+</span>pts
+</div>
+<div>
+<label for="rating_form_title" class="rating_form_label">Título de la calificación</label>
+<input id="rating_form_title" type="text" class="rating_description" style="width: 90%;" name="description">
+</div>
+<div>
+<label for="rating_form_description" class="rating_form_label">Descripción de la calificación</label>
+<textarea id="rating_form_description" rows="4" style="width: 90%;" class="rating_long_description" name="rating_long_description" form="edit_rating_form"></textarea>
+</div>
+<div class="button-container">
+<button type="button" class="btn button-secondary cancel_button">Cancelar</button>
+<button type="button" class="btn btn-primary save_button ok_button">Actualizar calificación</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div class="rubric_container rubric  " id="default_rubric" style="display: none;">
+<div class="screenreader-only"><h2>Rúbrica</h2></div>
+<div class="rubric_title">
+<div style="display: none;" class="links displaying pull-right">
+<a href="https://classroom.emeritus.org/courses/7372/rubrics/%7B%7B%20id%20%7D%7D" class=" edit_rubric_link no-print no-hover" style="" title="Editar rúbrica" aria-label="Editar rúbrica" role="button"><i class="icon-edit standalone-icon"></i></a>
+<a href="https://classroom.emeritus.org/search/rubrics?q=" class="find_rubric_link no-print no-hover" style="" title="Encontrar otra rúbrica" aria-label="Encontrar otra rúbrica" role="button"><i class="icon-search standalone-icon"></i></a>
+<a href="https://classroom.emeritus.org/courses/7372/rubric_associations/%7B%7B%20rubric_association_id%20%7D%7D" class="delete_rubric_link no-print no-hover" style="" title="Eliminar rúbrica" aria-label="Eliminar rúbrica" role="button"><i class="icon-trash standalone-icon"></i></a>
+<div style="display: none;">
+<div class="use_for_grading">&nbsp;</div>
+<div class="free_form_criterion_comments">&nbsp;</div>
+<div class="hide_score_total">&nbsp;</div>
+<div class="hide_outcome_results">&nbsp;</div>
+<div class="hide_points">&nbsp;</div>
+<div class="rubric_association_id">&nbsp;</div>
+<div class="user_id">&nbsp;</div>
+<div class="assessment_type"></div>
+<a href="https://classroom.emeritus.org/courses/7372/rubric_associations/%7B%7B%20rubric_association_id%20%7D%7D/assessments/%7B%7B%20assessment_id%20%7D%7D" rel="nofollow" class="edit_assessment_link">&nbsp;</a>
+<a href="https://classroom.emeritus.org/courses/7372/rubrics/%7B%7B%20rubric_id%20%7D%7D" class="edit_rubric_url">&nbsp;</a>
+<a href="https://classroom.emeritus.org/courses/7372/rubric_associations/%7B%7B%20association_id%20%7D%7D" class="delete_rubric_url">&nbsp;</a>
+</div>
+</div>
+<div style="float: right; font-size: 0.8em; display: none;" class="links displaying locked">
+<span style="">No puede cambiar una rúbrica una vez que ha comenzado a usarla.</span>
+<a href="https://classroom.emeritus.org/courses/7372/rubric_associations/%7B%7B%20association_id%20%7D%7D" class="delete_rubric_url" style="display: none;">&nbsp;</a>
+</div>
+<div class="editing" style="float: right;">
+<a href="https://classroom.emeritus.org/search/rubrics?q=" class="find_rubric_link icon-search" style="" title="Encontrar una rúbrica existente">Encontrar una rúbrica</a>
+</div>
+<div class="editing" style="text-align: left">
+<label for="rubric-title">Título:</label>
+<input id="rubric-title" type="text" class="no-margin-bottom" name="title" value="Una rúbrica" style="width: 200px;" maxlength="255" aria-label="Título:">
+<a href="https://classroom.emeritus.org/search/rubrics?q=" style="display: none;"><img alt="" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/find-6164443e2a.webp"> Encontrar rúbrica</a>
+</div>
+<div class="displaying">
+<span class="title" tabindex="-1">Título</span>
+</div>
+<div class="has-assessments-warning" style="display: none;">
+Ya ha clasificado estudiantes con esta rúbrica. Cambios mayores podrían afectar sus resultados de evaluaciones.
+</div>
+</div>
+<table class="rubric_table">
+<caption>
+<div class="screenreader-only">
+<span class="title">Título</span>
+</div>
+</caption>
+<thead>
+<tr>
+<th scope="col">Criterios</th>
+<th scope="col">Calificaciones</th>
+<th scope="col" class="toggle_for_hide_points ">
+Pts
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="criterion_blank" class="criterion blank" style="display: none;">
+<td class="criterion_description hover-container pad-box-micro">
+<div class="container">
+<div class="links editing">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_criterion_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar descripción del criterio</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_criterion_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar fila de criterio</span></a>
+</div>
+<div class="description_content">
+<span class="outcome_sr_content" aria-hidden="true">
+<i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+<span class="screenreader-only">Este criterio depende de una competencia de aprendizaje</span>
+</span>
+<span class="description description_title">Descripción del criterio</span>
+<span class="learning_outcome_id" style="display: none;"></span>
+<span class="criterion_id" style="display: none;"></span>
+<div class="long_description small_description"></div>
+<div class="hide_when_learning_outcome ">
+<div class="criterion_use_range_div editing toggle_for_hide_points ">
+<label>Rango
+<input type="checkbox" class="criterion_use_range"></label>
+</div>
+</div>
+<div class="threshold toggle_for_hide_points ">
+límite:
+<span class="mastery_points">5</span> pts
+</div>
+</div>
+</div>
+</td>
+<td style="padding: 0;">
+<table class="ratings" style=""><tbody><tr>
+<td class="rating edge_rating
+                
+                ">
+<div class="container">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">5</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Con marcas</div>
+<div class="rating_long_description small_description"></div>
+<span class="rating_id" style="display: none;">blank</span>
+</div>
+<div class="editing links add_rating_link">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="add_rating_link_after" aria-label="Agregar calificación"><i class="icon-add icon-Solid"></i></a>
+</div>
+</div>
+</td>
+<td class="rating edge_rating
+                infinitesimal
+                ">
+<div class="container">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">0</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Sin marcas</div>
+<div class="rating_long_description small_description"></div>
+<span class="rating_id" style="display: none;">blank_2</span>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+Esta área será usada por el evaluador para que pueda dejar comentarios relacionados al criterio.
+</div>
+</td>
+<td class="nobr points_form toggle_for_hide_points ">
+<div class="editing" style="white-space: normal">
+<span style="white-space: nowrap; font-size: 0.8em">
+<input type="text" aria-label="Puntos" value="5" class="criterion_points span1 no-margin-bottom">
+pts
+</span><br>
+</div>
+<div class="displaying">
+<span style="white-space: nowrap;">
+<span class="criterion_rating_points_holder" style="display: none;">
+<span class="criterion_rating_points">&nbsp;</span> /
+</span>
+<span class="display_criterion_points">5</span> pts<br>
+</span>
+</div>
+<div class="ignoring">
+<span> -- </span>
+</div>
+<div class="criterion_comments">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="no-hover criterion_comments_link" title="Comentarios adicionales">
+<img alt="Comentarios adicionales" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/rubric_comment-ddae8546ab.webp">
+</a>
+<div class="custom_rating" style="display: none;"></div>
+</div>
+</td>
+</tr>
+<tr id="criterion_1" class="criterion" style="display: table-row;">
+<td class="criterion_description hover-container pad-box-micro">
+<div class="container">
+<div class="links editing">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_criterion_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar descripción del criterio</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_criterion_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar fila de criterio</span></a>
+</div>
+<div class="description_content">
+<span class="outcome_sr_content" aria-hidden="true">
+<i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+<span class="screenreader-only">Este criterio depende de una competencia de aprendizaje</span>
+</span>
+<span class="description description_title">Descripción del criterio</span>
+<span class="learning_outcome_id" style="display: none;"></span>
+<span class="criterion_id" style="display: none;"></span>
+<div class="long_description small_description"></div>
+<div class="hide_when_learning_outcome ">
+<div class="criterion_use_range_div editing toggle_for_hide_points ">
+<label>Rango
+<input type="checkbox" class="criterion_use_range"></label>
+</div>
+</div>
+<div class="threshold toggle_for_hide_points ">
+límite:
+<span class="mastery_points">5</span> pts
+</div>
+</div>
+</div>
+</td>
+<td style="padding: 0;">
+<table class="ratings" style=""><tbody><tr>
+<td class="rating edge_rating
+                
+                ">
+<div class="container">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">5</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Con marcas</div>
+<div class="rating_long_description small_description"></div>
+<span class="rating_id" style="display: none;">blank</span>
+</div>
+<div class="editing links add_rating_link">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="add_rating_link_after" aria-label="Agregar calificación"><i class="icon-add icon-Solid"></i></a>
+</div>
+</div>
+</td>
+<td class="rating edge_rating
+                infinitesimal
+                ">
+<div class="container">
+<div class="rating-main">
+<div class="editing links">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="edit_rating_link"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Editar calificación</span></a>
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="delete_rating_link"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Eliminar calificación</span></a>
+</div>
+<div class="clear"></div>
+<span class="nobr toggle_for_hide_points ">
+<span class="points">0</span>
+<span class="range_rating" style="display: none;">para &gt;<span class="min_points">0</span></span> pts
+</span>
+<div class="description rating_description_value">Sin marcas</div>
+<div class="rating_long_description small_description"></div>
+<span class="rating_id" style="display: none;">blank_2</span>
+</div>
+</div>
+</td>
+</tr></tbody></table>
+<div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+Esta área será usada por el evaluador para que pueda dejar comentarios relacionados al criterio.
+</div>
+</td>
+<td class="nobr points_form toggle_for_hide_points ">
+<div class="editing" style="white-space: normal">
+<span style="white-space: nowrap; font-size: 0.8em">
+<input type="text" aria-label="Puntos" value="5" class="criterion_points span1 no-margin-bottom">
+pts
+</span><br>
+</div>
+<div class="displaying">
+<span style="white-space: nowrap;">
+<span class="criterion_rating_points_holder" style="display: none;">
+<span class="criterion_rating_points">&nbsp;</span> /
+</span>
+<span class="display_criterion_points">5</span> pts<br>
+</span>
+</div>
+<div class="ignoring">
+<span> -- </span>
+</div>
+<div class="criterion_comments">
+<a href="https://classroom.emeritus.org/courses/7372/assignments/220483?module_item_id=1571759#" class="no-hover criterion_comments_link" title="Comentarios adicionales">
+<img alt="Comentarios adicionales" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/rubric_comment-ddae8546ab.webp">
+</a>
+<div class="custom_rating" style="display: none;"></div>
+</div>
+</td>
+</tr><tr class="summary">
+<td colspan="4">
+<div class="total_points_holder toggle_for_hide_points " style="float: right; ">
+<span>Puntos totales:
+<span class="rubric_total">
+5
+</span>
+<span class="assessing">de 5</span> </span>
+</div>
+<div class="editing pull-left">
+<span id="add_criterion_holder" class="criterion_link"></span>
+</div>
+<div class="clear"></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<table style="display: none;">
+<tbody><tr id="edit_rubric">
+<td colspan="4">
+<form id="edit_rubric_form" class="edit-rubric-form no-margin-bottom">
+<div class="rubric_custom_ratings" style="">
+<input type="checkbox" id="rubric_custom_rating" class="rubric_custom_rating">
+<label for="rubric_custom_rating">Escribiré comentarios sin formato al evaluar a los estudiantes</label>
+</div>
+<div class="hide_points" style="">
+<input type="checkbox" id="hide_points" class="hide_points_checkbox">
+<label for="hide_points">Eliminar puntos de la rúbrica</label>
+</div>
+<div class="hide_outcome_results" style="">
+<input type="checkbox" id="hide_outcome_results" class="hide_outcome_results_checkbox">
+<label for="hide_outcome_results">No publicar los resultados en el Libro de calificaciones para el dominio del aprendizaje</label>
+</div>
+<div class="rubric_grading" style="">
+<input type="checkbox" id="grading_rubric" class="grading_rubric_checkbox">
+<label for="grading_rubric">Usar esta rúbrica para calificar las tareas</label>
+</div>
+<div class="totalling_rubric" style="">
+<input type="checkbox" id="totalling_rubric" class="totalling_rubric_checkbox">
+<label for="totalling_rubric">Ocultar el puntaje total para los resultados de evaluaciones</label>
+</div>
+<div class="ic-Action-header ic-Action-header--half-margin">
+<div class="ic-Action-header__Primary">
+<button type="button" class="Button cancel_button">Cancelar</button>
+<button type="submit" class="Button Button--primary save_button">Crear rúbrica</button>
+</div>
+</div>
+</form>
+</td>
+</tr>
+</tbody></table>
+<div id="assignment_external_tools"><div></div></div>
+<div id="sequence_footer" data-course-id="7372" data-asset-id="220483" data-asset-type="Assignment"><div class="module-sequence-padding"></div>
+<div class="module-sequence-footer" role="navigation" aria-label="Navegación del módulo">
+  <div class="module-sequence-footer-content">
+    
+      <span class="module-sequence-footer-button--previous" data-tooltip="right" data-html-tooltip-title="&lt;i class=&#39;icon-quiz&#39;&gt;&lt;/i&gt; Knowledge Check 10.3: Docker (30:00)">
+          <a href="https://classroom.emeritus.org/courses/7372/modules/items/1571758" role="button" class="Button" aria-describedby="msf0-previous-desc" aria-label="Ítem del módulo anterior">
+            <i class="icon-mini-arrow-left"></i>Anterior
+            <span id="msf0-previous-desc" class="hidden" hidden="">Anterior: Knowledge Check 10.3: Docker (30:00)</span>
+          </a>
+      </span>
+    
+
+    
+      <span class="module-sequence-footer-button--next" data-tooltip="left" data-html-tooltip-title="&lt;i class=&#39;icon-document&#39;&gt;&lt;/i&gt; Load JavaScript Server Using Docker-Compose.yml (02:47)">
+        <a href="https://classroom.emeritus.org/courses/7372/modules/items/1571760" role="button" class="Button" aria-describedby="msf0-next-desc" aria-label="Ítem del módulo siguiente">
+          Siguiente<i class="icon-mini-arrow-right"></i>
+          <span id="msf0-next-desc" class="hidden" hidden="">Siguiente: Load JavaScript Server Using Docker-Compose.yml (02:47)</span>
+        </a>
+      </span>
+    
+  </div>
+</div>
+</div>
+</div>
+</div>
+<div id="right-side-wrapper" class="ic-app-main-content__secondary">
+<aside id="right-side" role="complementary">
+<div id="sidebar_content">
+</div>
+</aside>
+</div>
+</div>
+</div>
+</div>
+<div style="display:none;">
+</div>
+<div id="aria_alerts" class="hide-text affix" role="alert" aria-live="assertive"></div>
+<div id="StudentTray__Container"></div>
+<script>
+    Object.assign(
+      ENV,
+      {}
+    )
+  </script>
+<script>
+//<![CDATA[
+
+      ;["https://classroom.emeritus.org/accounts/1/files/2926356/download?verifier=LFea8r0GyL8c2Hg398Ckz2Bdt89sFdB3iPS7UeoF", "https://classroom.emeritus.org/accounts/1/files/1027360/download?verifier=jnUIGJA4tBg3tHpVE6odg5XMG7CM42mgVX27gD8g"].forEach(function(src) {
+        var s = document.createElement('script'); s.src = src; s.async = false;
+        document.head.appendChild(s)
+      });
+//]]>
+</script>
+</div> 
+<script defer="" src="./Activity 10.1_ Creating a Docker Image (45_00)_files/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;8a7d17065fd71015&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfL4&quot;:true}},&quot;version&quot;:&quot;2024.7.0&quot;,&quot;token&quot;:&quot;b539d72557bb44bda7f9d2a1ed82dec3&quot;}" crossorigin="anonymous"></script>
+
+
+<div id="nav-tray-portal" style="position: relative; z-index: 99;"></div><div class="tinymce-a11y-checker-container"></div></body><div id="cp-be-element" style="display: none; position: fixed; z-index: 2147483647;"><template shadowrootmode="open"><div id="cp-be-toast" dir="ltr"><div id="cp-be-toast-status-container"><div id="cp-be-toast-status-line"></div><img id="cp-be-toast-status-icon"></div><div id="cp-be-toast-notification-container"><div id="cp-be-toast-content-container"><div id="cp-be-toast-text-container"><div id="cp-be-toast-title"></div><div id="cp-be-toast-message"></div></div><img id="cp-be-toast-image" style="display: none;"></div><div id="cp-be-toast-action-container"><div id="cp-be-toast-do-not-show-checkbox-container"><label id="cp-be-toast-do-not-show-checkbox-label" for="cp-be-toast-do-not-show-checkbox">Don't show again<input type="checkbox" id="cp-be-toast-do-not-show-checkbox"><span id="cp-be-toast-do-not-show-checkmark"></span></label></div><div id="cp-be-toast-close-button">Got it</div></div></div></div><link id="cp-be-toast-style" rel="stylesheet" href="chrome-extension://deakbjemijlmlcehdgejmdpekkceodmk/data/css/Toast.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter"></template></div></html>
